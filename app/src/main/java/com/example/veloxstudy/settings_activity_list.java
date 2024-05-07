@@ -1,7 +1,9 @@
 package com.example.veloxstudy;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -75,16 +77,34 @@ public class settings_activity_list extends AppCompatActivity {
 
             if(position==6){
 
-                FirebaseAuth.getInstance().signOut();
+                AlertDialog.Builder logoutDialog = new AlertDialog.Builder(this);
+                logoutDialog.setTitle("Log out?");
+                logoutDialog.setMessage("Do you want to Log out?");
+                logoutDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        FirebaseAuth.getInstance().signOut();
 
-                SharedPreferences pref = getSharedPreferences("login",MODE_PRIVATE);
-                SharedPreferences.Editor editor = pref.edit();
-                editor.putBoolean("flag",false);
-                editor.apply();
+                        SharedPreferences pref = getSharedPreferences("login",MODE_PRIVATE);
+                        SharedPreferences.Editor editor = pref.edit();
+                        editor.putBoolean("flag",false);
+                        editor.apply();
 
-                Intent iLogin = new Intent(getApplicationContext(),Login_Activity.class);
-                startActivity(iLogin);
-                finish();
+                        Intent iLogin = new Intent(getApplicationContext(),Login_Activity.class);
+                        startActivity(iLogin);
+                        finish();
+                    }
+                });
+
+                logoutDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                logoutDialog.show();
+
             }
 
         });

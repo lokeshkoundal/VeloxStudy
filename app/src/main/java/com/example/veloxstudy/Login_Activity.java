@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -13,22 +12,17 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.Firebase;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.auth.UserInfo;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class Login_Activity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 123;
@@ -120,7 +114,6 @@ public class Login_Activity extends AppCompatActivity {
                                         if (document.exists()) {
 
                                             docRef.update(usermap);
-                                            Log.e("tatti", "pappu pass hogya");
                                         }
                                         else
                                             docRef.set(usermap);
@@ -128,7 +121,6 @@ public class Login_Activity extends AppCompatActivity {
                                 }
                             });
                       }
-                        Log.e("tatti2", "bahar wala");
 
                         Toast.makeText(getApplicationContext(),"Login Success !!",Toast.LENGTH_SHORT).show();
 
