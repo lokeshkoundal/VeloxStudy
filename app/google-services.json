@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "632832294215",
+    "project_id": "veloxstudy1",
+    "storage_bucket": "veloxstudy1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:632832294215:android:989befabe91e251e77e062",
+        "android_client_info": {
+          "package_name": "com.example.veloxstudy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "632832294215-u5bd47mhjreilbqt2gvliou83qfk3ftf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.veloxstudy",
+            "certificate_hash": "ca6b34a699632b3ad9706cafef95d52396d3ccbd"
+          }
+        },
+        {
+          "client_id": "632832294215-1fv771u2gflgd7kbrgnp54pusqka0vv6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0jEzmDB7cttz3oFlv7e8pFqQx1w8U90g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "632832294215-1fv771u2gflgd7kbrgnp54pusqka0vv6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

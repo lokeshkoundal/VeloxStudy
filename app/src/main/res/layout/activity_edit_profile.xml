@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/splashbg"
+    tools:context=".EditProfile"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/resultextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="@color/greenapp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/BioCardView"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        app:cardBackgroundColor="@color/greyApp"
+        app:cardCornerRadius="20dp"
+        android:elevation="10dp">
+
+        <TextView
+            android:id="@+id/textViewBio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/oval_background"
+            android:backgroundTint="@color/black"
+            android:text="@string/enter_your_bio"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/editTextBio"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewBio"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="130dp"
+            android:layout_marginEnd="20dp"
+            android:backgroundTint="@color/black"
+            android:drawableStart="@drawable/ic_create"
+            android:drawableTint="@color/black"
+            android:hint="@string/type_your_bio_here"
+            android:maxLength="500"
+            android:textColor="@color/white"
+            android:textColorHint="#AFA5A5"
+            android:importantForAutofill="no"
+            tools:ignore="VisualLintTextFieldSize" />
+
+
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/buttonSubmitBIO"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/BioCardView"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/submit" />
+
+
+</RelativeLayout>

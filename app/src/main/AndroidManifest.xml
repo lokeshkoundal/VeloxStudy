@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@drawable/veloxstudy__2_"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/veloxstudy__2_"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.VeloxStudy"
+        tools:targetApi="31">
+        <activity
+            android:name=".ContactUs"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+        <activity
+            android:name=".PrivacyPolicy"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".EditProfile"
+            android:exported="false"
+            android:label="@string/title_activity_edit_profile"
+            android:theme="@style/Theme.VeloxStudy"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Login_Activity"
+            android:exported="true"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".settings_activity_list"
+            android:exported="true"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".SplashScreen"
+            android:exported="true"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"/>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+    </application>
+
+</manifest>

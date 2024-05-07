@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="16dp"
+    android:gravity="center"
+    android:background="@color/black"
+    tools:context=".Login_Activity">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="700dp"
+        android:backgroundTint="@color/greyApp"
+        app:cardCornerRadius="15dp">
+
+
+
+        <TextView
+            android:id="@+id/TextViewLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ubuntu_mono"
+            android:text="Welcome to VeloxStudy!"
+            android:textColor="@color/white"
+            android:textSize="50sp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="130dp"
+            android:text="An On-Demand Learning Platform"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="15sp" />
+
+
+    <ImageView
+        android:id="@+id/imgViewLogin"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_below="@+id/TextViewLogin"
+        android:layout_marginTop="250dp"
+        android:src="@drawable/veloxstudy__2_"
+        android:layout_marginStart="110dp"
+        android:background="@drawable/borderforvsicon"
+        android:backgroundTint="@color/white"/>
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/googleBtn"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imgViewLogin"
+            android:layout_marginStart="67dp"
+            android:layout_marginTop="520dp" />
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>

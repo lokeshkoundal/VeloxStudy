@@ -1,0 +1,97 @@
+<resources>
+    <string name="app_name">VeloxStudy</string>
+    <string name="splashname">"  VeloxStudy  "</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="default_web_client_id">632832294215-1fv771u2gflgd7kbrgnp54pusqka0vv6.apps.googleusercontent.com</string>
+    <string name="search">Search</string>
+    <string name="backgroundTeacher">backgroundTeacher</string>
+    <string name="popular_tutors">Popular Profiles</string>
+    <string name="title_activity_edit_profile">EditProfile</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="Bio_not_set">[ Bio hasn\'t been Added yet ! ]</string>
+    <string name="lorem_ipsum">lorem ipsumm bl bb l blb lblblbl</string>
+    <string name="BioSet">"Your bio has been updated !!"</string>
+    <string name="submit">Submit</string>
+    <string name="type_your_bio_here">Type your bio here</string>
+    <string name="enter_your_bio">"    Enter Your Bio    "</string>
+    <string name="PrivacyPolicy"><b>Privacy Policy</b>\n\n
+
+
+        Welcome to VeloxStudy, an innovative platform connecting students and teachers to facilitate seamless learning experiences. At Veloxstudy, we are committed to safeguarding your privacy and ensuring the security of your personal information.\n\n
+
+        <b>Information We Collect:</b>\n\n
+
+        To provide you with the best possible user experience, Veloxstudy collects certain information:\n\n
+
+        <b>Account Information:</b>\n When you register, we collect basic account details such as your name, email address, and profile picture to personalize your experience.\n\n
+
+        <b>User-Generated Content:</b>\n Your interactions within the platform, such as posts, messages, and comments, are stored to enhance community engagement.\n\n
+
+        <b>Device Information:</b>\n We automatically collect information about the device you use to access Veloxstudy, including device type, operating system, and browser.\n\n
+
+        <b>How We Use Your Information:</b>\n\n
+
+        Veloxstudy utilizes the collected information for the following purposes:\n
+
+        <b>Personalization:</b>\n\n To tailor the platform to your preferences, providing relevant content and connections.\n\n
+        <b>Communication:</b>\n\n To facilitate seamless communication between users, including messages, notifications, and updates.\n\n
+
+
+        <b>Analytics:</b>\n\n We use aggregated and anonymized data to analyze user behavior, improve our services, and enhance user satisfaction.\n\n
+
+
+        <b>Security:</b>\n\n To ensure the security and integrity of our platform, protecting against unauthorized access and misuse.\n\n
+
+
+        <b>Sharing Your Information:</b>\n\n
+
+        Veloxstudy prioritizes your privacy, and we do not sell or share your personal information with third parties for their marketing purposes. However, certain information may be shared within the platform to enable essential features, such as connecting students with teachers.\n\n
+
+
+        <b>Data Security:</b>\n\n
+
+        We employ industry-standard security measures to protect your information from unauthorized access, disclosure, alteration, and destruction. Your data is encrypted during transmission and securely stored.\n\n
+
+
+        <b>Your Choices:</b>\n\n
+
+        Veloxstudy provides you with control over your personal information. You can review, edit, or delete your account at any time. Adjust your privacy settings to control the visibility of your profile and the content you share.\n\n
+
+
+        <b>Updates to Privacy Policy:</b>\n\n
+
+        We may update our Privacy Policy to reflect changes in our practices. We encourage you to review the policy periodically.\n\n
+
+
+        By using VeloxStudy, you agree to the terms outlined in this Privacy Policy. If you have any questions or concerns, please contact us at privacy@veloxstudy.com . Thank you for choosing Veloxstudy for your learning journey.\n\n
+
+        Last Updated: 17/12/2023</string>
+
+    <string name="email">Email : contact@veloxystudy.com</string>
+    <string name="phone">Phone :\n +91–1938 884 723</string>
+    <string name="notification_button">notification_button</string>
+    <string name="upcoming_classes">Upcoming Classes</string>
+    <string name="no_class_is_scheduled_yet">No class is scheduled yet.</string>
+    <string name="welcome_to_veloxstudy">Welcome to VeloxStudy</string>
+    <string name="welcome_photo">Welcome photo</string>
+    <string name="create_a_chat">create a chat</string>
+    <string name="video_call">Video call</string>
+    <string name="chat">Chat</string>
+    <string name="pfp">pfp</string>
+    <string name="settings">Settings</string>
+    <string name="followers_0">Followers 0</string>
+    <string name="followings_0">Followings 0</string>
+    <string name="your_bio">Your Bio</string>
+    <string name="edit_profile">Edit Profile</string>
+
+</resources>
+
+
+

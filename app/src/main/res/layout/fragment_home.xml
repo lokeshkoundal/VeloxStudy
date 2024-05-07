@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment_Home"
+    android:background="@color/black">
+
+    <ImageButton
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginStart="342dp"
+        android:src="@drawable/ic_notification"
+        android:background="@color/black"
+        android:contentDescription="@string/notification_button"/>
+
+    <TextView
+        android:id="@+id/tvAppNameHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="cursive"
+        android:text="@string/app_name"
+        android:textColor="@color/white"
+        android:textSize="35sp"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/firstcvHome"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_below="@+id/tvAppNameHome"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/greyApp"
+        android:elevation="40dp"
+        app:cardCornerRadius="8dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:text="@string/upcoming_classes"
+            android:textAlignment="center"
+            android:textColor="#C1B8B8"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="70dp"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="@string/no_class_is_scheduled_yet"
+            android:textColor="#FBBD03"
+            android:textSize="18sp" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/firstcvHome"
+        android:layout_marginTop="5dp"
+        android:backgroundTint="@color/greyApp"
+        android:elevation="20dp"
+        android:padding="20dp"
+        app:cardCornerRadius="15dp" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/welcome_to_veloxstudy"
+            android:textAlignment="center"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="#C1B8B8"
+            android:layout_marginTop="8dp" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="380dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="20dp"
+            android:elevation="15dp"
+            app:cardCornerRadius="15dp">
+
+            <ImageView
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/imgwelcome"
+                android:contentDescription="@string/welcome_photo"/>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
