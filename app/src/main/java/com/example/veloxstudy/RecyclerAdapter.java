@@ -1,6 +1,7 @@
 package com.example.veloxstudy;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter <RecyclerAdapter.ViewH
         Glide.with(context)
                 .load(arrPopular.get(position).img)
                 .into(holder.imgTv);
+
+
     }
 
 

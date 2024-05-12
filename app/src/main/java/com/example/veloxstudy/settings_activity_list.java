@@ -77,7 +77,7 @@ public class settings_activity_list extends AppCompatActivity {
 
             if(position==6){
 
-                AlertDialog.Builder logoutDialog = new AlertDialog.Builder(this);
+                AlertDialog.Builder logoutDialog = new AlertDialog.Builder(settings_activity_list.this);
                 logoutDialog.setTitle("Log out?");
                 logoutDialog.setMessage("Do you want to Log out?");
                 logoutDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
