@@ -6,5 +6,10 @@
         <item name="android:statusBarColor">@color/black</item>
     </style>
 
+    <style name="EditTextStyle"
+        parent="Widget.AppCompat.EditText">
+        <item name="android:textColorHighlight">#576066</item>
+    </style>
+
     <style name="Theme.VeloxStudy" parent="Base.Theme.VeloxStudy" />
 </resources>

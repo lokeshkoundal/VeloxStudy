@@ -45,6 +45,21 @@ public class RecyclerAdapter extends RecyclerView.Adapter <RecyclerAdapter.ViewH
                 .into(holder.imgTv);
 
 
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,ChatActivity.class);
+                String uri = (arrPopular.get(position).img).toString();
+
+                intent.putExtra("name",arrPopular.get(position).name);
+                intent.putExtra("img",uri);
+                intent.putExtra("uid",arrPopular.get(position).uid);
+                context.startActivity(intent);
+
+
+            }
+        });
     }
 
 

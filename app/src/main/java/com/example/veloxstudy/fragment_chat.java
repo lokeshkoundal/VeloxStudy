@@ -65,12 +65,12 @@ public class fragment_chat extends Fragment {
                             String email = document.getString("Email");
 
                             String id = document.getId();
-                            Log.e("DOCUMENT ID",id);
+                           // Log.e("DOCUMENT ID",id);
                             String uid = user.getUid();
-                            Log.e("UID",uid);
+                          //  Log.e("UID",uid);
 
                             if(!uid.equals(id)) {
-                                Model model = new Model(pfp, name, email);
+                                Model model = new Model(pfp, name, email,id);
                                 arrModel.add(model);
                             }
                         }

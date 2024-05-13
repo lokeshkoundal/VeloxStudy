@@ -14,8 +14,7 @@ import android.widget.ImageButton;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.example.veloxstudy.fragment_explore;
 
 public class MainActivity extends AppCompatActivity {
     byte FragFlag = 1;
@@ -29,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         loadFrag(new fragment_Home(), false);
 
+
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -37,17 +37,22 @@ public class MainActivity extends AppCompatActivity {
                 int id = item.getItemId();
 
                 if(id==R.id.nav_home) {
-                    if(FragFlag!=1) {
-                        loadFrag(new fragment_Home(), true);
-                        FragFlag = 1;
-                    }
+                    //if(!fragment_explore.fetchFlag){
+                        if (FragFlag != 1) {
+                            loadFrag(new fragment_Home(), true);
+                            FragFlag = 1;
+                        }
+                  //  }
+
                 }
 
                 if(id==R.id.nav_explore) {
-                    if(FragFlag!=2) {
-                        loadFrag(new fragment_explore(), true);
-                        FragFlag = 2;
-                    }
+                  //  if(!fragment_explore.fetchFlag) {
+                        if (FragFlag != 2) {
+                            loadFrag(new fragment_explore(), true);
+                            FragFlag = 2;
+                        }
+                  //  }
                 }
 
                 if(id==R.id.nav_chat) {

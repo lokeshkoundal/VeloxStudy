@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,6 +30,8 @@ public class fragment_explore extends Fragment {
     ArrayList<Model> arrModel;
     String currentCollection;
 
+  // public static boolean fetchFlag;
+
     public fragment_explore(){
     }
 
@@ -44,7 +47,11 @@ public class fragment_explore extends Fragment {
         FireStore = FirebaseFirestore.getInstance();
         arrModel = new ArrayList<>();
 
+
+      //  fetchFlag = true;
         fetchAllUsersData();
+
+     //   fetchFlag = false;
 
         RecyclerAdapter adapter = new RecyclerAdapter(requireContext(),arrModel);
         recyclerView.setAdapter(adapter);
@@ -62,14 +69,16 @@ public class fragment_explore extends Fragment {
                             Uri pfp = Uri.parse(document.getString("uri"));
                             String name = document.getString("Name");
                             String email = document.getString("Email");
+                            String uid = document.getId();
 
-                            Model model = new Model(pfp, name, email);
+                            Model model = new Model(pfp, name, email,uid);
                             arrModel.add(model);
                         }
 
                         RecyclerAdapter adapter = new RecyclerAdapter(requireContext(), arrModel);
                         recyclerView.setAdapter(adapter);
                     } else {
+                        Toast.makeText(requireContext(),"Error fetching data",Toast.LENGTH_SHORT).show();
                         Log.d("TAG","Task Failed");
                     }
                 });

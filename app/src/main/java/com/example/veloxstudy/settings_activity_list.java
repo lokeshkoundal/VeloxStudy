@@ -85,6 +85,7 @@ public class settings_activity_list extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         FirebaseAuth.getInstance().signOut();
 
+
                         SharedPreferences pref = getSharedPreferences("login",MODE_PRIVATE);
                         SharedPreferences.Editor editor = pref.edit();
                         editor.putBoolean("flag",false);
@@ -92,7 +93,8 @@ public class settings_activity_list extends AppCompatActivity {
 
                         Intent iLogin = new Intent(getApplicationContext(),Login_Activity.class);
                         startActivity(iLogin);
-                        finish();
+
+                        finishAffinity();
                     }
                 });
 

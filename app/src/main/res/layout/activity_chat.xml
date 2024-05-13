@@ -17,36 +17,40 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-            android:contentDescription="@string/pfp"
             android:id="@+id/ImageChat"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_margin="8dp" />
+            android:layout_width="75dp"
+            android:background="#252525"
+            android:layout_height="75dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:contentDescription="@string/pfp" />
 
         <TextView
             android:id="@+id/NameChat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_toRightOf="@+id/ImageChat"
-            android:text="Dheeraj singh bora"
+            android:layout_toEndOf="@+id/ImageChat"
             android:textColor="@color/white"
             android:textSize="25sp" />
 
         <TextView
+            android:id="@+id/StatusChat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/NameChat"
             android:layout_marginTop="2dp"
-            android:layout_toRightOf="@+id/ImageChat"
-            android:text="status"
+            android:layout_toEndOf="@+id/ImageChat"
+            android:text="@string/status"
             android:textColor="#C4CACD"
-            android:textSize="25sp" />
+            android:textSize="22sp" />
 
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/ChatRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
@@ -54,49 +58,56 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="2.5dp"
+
+    <androidx.cardview.widget.CardView
+        android:layout_margin="4dp"
+        android:id="@+id/cardView2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#252525"
+        app:cardCornerRadius="17dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/sendMsgButton"
         app:layout_constraintStart_toStartOf="parent">
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-       <androidx.cardview.widget.CardView
-           android:layout_width="0dp"
-           android:layout_height="match_parent"
-           app:cardCornerRadius="17dp"
-           android:backgroundTint="#252525"
-           android:layout_weight="1">
+            <EditText
+                android:id="@+id/writeMsgET"
+                style="@style/EditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_marginStart="5dp"
+                android:autofillHints="none"
+                android:background="@null"
+                android:hint="@string/message"
+                android:imeOptions="actionNext"
+                android:inputType="textMultiLine"
+                android:maxLines="6"
+                android:scrollbars="vertical"
+                android:textColor="@color/white"
+                android:textColorHint="#AFA6A6"
+                android:textSize="23sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TouchTargetSizeCheck" />
 
-           <EditText
-               android:layout_width="match_parent"
-               android:layout_height="match_parent"
-               android:hint="Enter your message"
-               android:textColorHint="#AFA6A6"
-               app:layout_constraintBottom_toBottomOf="parent"
-               app:layout_constraintStart_toStartOf="parent"
-               app:circularflow_radiusInDP="40dp"
-               android:textSize="20sp" />
+        </ScrollView>
 
-       </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
-        <ImageButton
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/circular"
-            android:src="@drawable/ic_sendmsg" />
-
-
-    </LinearLayout>
-
-
-
-
-
-
-
+    <ImageButton
+        android:id="@+id/sendMsgButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/circular"
+        android:contentDescription="@string/receiver_profile_picture"
+        android:src="@drawable/ic_sendmsg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cardView2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

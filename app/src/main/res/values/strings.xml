@@ -90,6 +90,9 @@
     <string name="followings_0">Followings 0</string>
     <string name="your_bio">Your Bio</string>
     <string name="edit_profile">Edit Profile</string>
+    <string name="receiver_profile_picture">receiver profile picture</string>
+    <string name="status">status</string>
+    <string name="message">Message</string>
 
 </resources>
 

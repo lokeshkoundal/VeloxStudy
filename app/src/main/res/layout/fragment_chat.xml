@@ -54,6 +54,7 @@
                 android:id="@+id/searchEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                style="@style/EditTextStyle"
                 android:layout_marginStart="19dp"
                 android:layout_marginEnd="19dp"
                 android:backgroundTint="@color/white"

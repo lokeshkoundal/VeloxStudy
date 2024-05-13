@@ -93,6 +93,14 @@ public class Login_Activity extends AppCompatActivity {
                         if(user!=null) {
 
                             uid = user.getUid();
+
+
+                            SharedPreferences prefs = getSharedPreferences("login",MODE_PRIVATE);
+                            SharedPreferences.Editor editor = prefs.edit();
+                            editor.putString("UserID",uid);
+                            editor.apply();
+
+
                             userName = user.getDisplayName();
                             userMail = user.getEmail();
                             photoUrl = String.valueOf(user.getPhotoUrl());
