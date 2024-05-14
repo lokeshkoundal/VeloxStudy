@@ -101,6 +101,8 @@
     <string name="bio">Bio</string>
     <string name="your_website">Your Website</string>
     <string name="profile_picture">Profile picture</string>
+    <string name="phone_number">phone number</string>
+    <string name="cancel">Cancel</string>
 
 </resources>
 

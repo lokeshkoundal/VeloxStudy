@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -25,7 +26,7 @@ import java.util.Map;
 
 public class EditProfile extends AppCompatActivity {
 
-    Button submitButton;
+    Button submitButton,cancelBtn;
     EditText bioEt,usernameEt,WebsiteEt;
     TextView resultTv;
     FirebaseFirestore fireStore;
@@ -38,6 +39,9 @@ public class EditProfile extends AppCompatActivity {
 
         submitButton = findViewById(R.id.saveProfileBtn);
         bioEt = findViewById(R.id.bioEditText);
+        usernameEt = findViewById(R.id.usernameEditText);
+        cancelBtn = findViewById(R.id.CancelBtn);
+
         fireStore = FirebaseFirestore.getInstance();
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -50,7 +54,7 @@ public class EditProfile extends AppCompatActivity {
 
         submitButton.setOnClickListener(view -> {
 
-            String bio = bioEt.getText().toString();
+            String bio = bioEt.getText().toString().trim();
 
 
                 documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -90,13 +94,17 @@ public class EditProfile extends AppCompatActivity {
                                 }
                             });
 
-
-
-
                     }
                 });
 
 
+        });
+
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
         });
 
     }

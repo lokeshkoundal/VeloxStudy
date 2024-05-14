@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="18dp"
+    android:background="@color/greyApp">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp"
     android:background="@color/greyApp">
 
     <!-- Profile Picture -->
     <ImageView
         android:id="@+id/profilePicture"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/ic_add_photo"
         android:contentDescription="@string/profile_picture" />
@@ -22,7 +28,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="8dp"
-        android:text="@string/change_profile_picture" />
+        android:text="@string/change_profile_picture"
+        android:textStyle="bold"/>
 
     <!-- Username -->
     <EditText
@@ -30,42 +37,58 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:autofillHints="name"
         android:hint="@string/username"
-        android:textColorHint="@color/light_white"
         android:inputType="text"
-        android:maxLines="1" />
+        style="@style/EditTextStyle"
+        android:maxLines="1"
+        android:minHeight="48dp"
+        android:textColorHint="@color/light_white" />
 
     <!-- Bio -->
-    <EditText
-        android:id="@+id/bioEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:textColorHint="@color/light_white"
-        android:hint="@string/bio"
-        android:inputType="textMultiLine"
-        android:maxLines="5" />
+
 
     <!-- Website -->
     <EditText
         android:id="@+id/websiteEditText"
-        android:textColorHint="@color/light_white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:hint="@string/your_website"
         android:inputType="textUri"
+        android:linksClickable="false"
+        style="@style/EditTextStyle"
+        android:autoLink="web"
+        android:maxLines="3"
+        android:minHeight="48dp"
+        android:textColorHint="@color/light_white" />
 
-        android:maxLines="3" />
     <EditText
         android:id="@+id/PhoneEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/EditTextStyle"
         android:layout_marginTop="8dp"
-        android:textColorHint="@color/light_white"
-        android:hint="phone number"
+        android:autofillHints="phone"
+        android:hint="@string/phone_number"
         android:inputType="phone"
-        android:maxEms="15"/>
+        android:maxEms="15"
+        android:maxLength="10"
+        android:minHeight="48dp"
+        android:textColorHint="@color/light_white" />
+
+    <EditText
+        android:id="@+id/bioEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/EditTextStyle"
+        android:layout_marginTop="8dp"
+        android:hint="@string/bio"
+        android:inputType="textMultiLine"
+        android:scrollbars="vertical"
+        android:maxLength="500"
+        android:minHeight="48dp"
+        android:textColorHint="@color/light_white" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switch1"
@@ -82,13 +105,24 @@
         android:textColor="@color/light_white"/>
 
 
-
-
     <Button
         android:id="@+id/saveProfileBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/save_changes" />
+        android:text="@string/save_changes"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/CancelBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:text="@string/cancel"
+        android:textColor="#FD4949"
+        android:textStyle="bold"/>
+
 
 </LinearLayout>
+
+</ScrollView>

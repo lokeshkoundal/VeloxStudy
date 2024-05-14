@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SplashScreen"
-    android:background="@drawable/splashbg"
+    android:background="@color/greyApp"
     android:layout_gravity="center">
 
 
@@ -25,11 +25,10 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:backgroundTint="@color/black"
         android:fontFamily="@font/alegreya_sans_sc_extrabold_italic"
         android:text="@string/splashname"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/lottieAnimationView"

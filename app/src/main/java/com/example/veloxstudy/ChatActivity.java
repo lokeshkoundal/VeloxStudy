@@ -105,16 +105,16 @@ public class ChatActivity extends AppCompatActivity {
                     messagesArrayList.add(messages);
                 }
                 messagesAdapter.notifyDataSetChanged();
+
                 if (messagesArrayList.isEmpty()) {
                     startConvo.setVisibility(View.VISIBLE);
-                } else {
-                    startConvo.setVisibility(View.GONE);
                 }
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -129,6 +129,7 @@ public class ChatActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -155,7 +156,7 @@ public class ChatActivity extends AppCompatActivity {
                                         .setValue(messages).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
-
+                                                chatRv.scrollToPosition(messagesArrayList.size() - 1);
                                             }
                                         });
                             }
