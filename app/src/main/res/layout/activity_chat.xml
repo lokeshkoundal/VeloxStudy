@@ -41,23 +41,39 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/NameChat"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="8dp"
             android:layout_toEndOf="@+id/ImageChat"
-            android:text="@string/status"
+            android:text="Last seen recently"
             android:textColor="#C4CACD"
-            android:textSize="22sp" />
+            android:textSize="16sp" />
 
     </RelativeLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ChatRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/cardView2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintVertical_bias="1.0" />
 
+    <ImageView
+        android:id="@+id/startConvo"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:src="@drawable/start_convo"
+        android:alpha="0.8"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/cardView2"
+        app:layout_constraintEnd_toEndOf="@+id/ChatRecyclerView"
+        app:layout_constraintStart_toStartOf="@+id/ChatRecyclerView"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
     <androidx.cardview.widget.CardView
         android:layout_margin="4dp"

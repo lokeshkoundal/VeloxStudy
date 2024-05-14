@@ -1,11 +1,8 @@
 package com.example.veloxstudy;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -14,7 +11,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,7 +22,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
@@ -37,7 +32,8 @@ public class ChatActivity extends AppCompatActivity {
     public static String senderImg,receiverImg;
 
     TextView nameTv,status;
-    ImageView imgChat;
+    ImageView imgChat,startConvo;
+
     EditText writeMsgET;
     ImageButton sendMsgIB;
     Uri imgUri;
@@ -69,6 +65,7 @@ public class ChatActivity extends AppCompatActivity {
         writeMsgET = findViewById(R.id.writeMsgET);
         sendMsgIB = findViewById(R.id.sendMsgButton);
         chatRv = findViewById(R.id.ChatRecyclerView);
+        startConvo = findViewById(R.id.startConvo);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setStackFromEnd(true);
@@ -76,7 +73,6 @@ public class ChatActivity extends AppCompatActivity {
 
         messagesAdapter = new MessagesAdapter(ChatActivity.this,messagesArrayList);
         chatRv.setAdapter(messagesAdapter);
-
         nameTv.setText(receiverName);
         imgUri = Uri.parse(receiverPFP);
 
@@ -109,6 +105,11 @@ public class ChatActivity extends AppCompatActivity {
                     messagesArrayList.add(messages);
                 }
                 messagesAdapter.notifyDataSetChanged();
+                if (messagesArrayList.isEmpty()) {
+                    startConvo.setVisibility(View.VISIBLE);
+                } else {
+                    startConvo.setVisibility(View.GONE);
+                }
             }
 
             @Override
@@ -121,7 +122,7 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                senderImg = (FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl()).toString();
+                senderImg = (Objects.requireNonNull(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhotoUrl())).toString();
 
                 receiverImg = receiverPFP;
             }
@@ -133,13 +134,10 @@ public class ChatActivity extends AppCompatActivity {
         });
 
 
-
-
-
         sendMsgIB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String message = (writeMsgET.getText()).toString();
+                String message = (writeMsgET.getText()).toString().trim();
                 if (message.isEmpty()){
                     Toast.makeText(getApplicationContext(),"Enter Message",Toast.LENGTH_SHORT).show();
                     return;

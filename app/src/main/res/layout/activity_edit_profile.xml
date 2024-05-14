@@ -1,79 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/splashbg"
-    tools:context=".EditProfile"
-    android:gravity="center">
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/greyApp">
 
-    <TextView
-        android:id="@+id/resultextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textColor="@color/greenapp"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        />
+    <!-- Profile Picture -->
+    <ImageView
+        android:id="@+id/profilePicture"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/ic_add_photo"
+        android:contentDescription="@string/profile_picture" />
 
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/BioCardView"
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="30dp"
-        app:cardBackgroundColor="@color/greyApp"
-        app:cardCornerRadius="20dp"
-        android:elevation="10dp">
-
-        <TextView
-            android:id="@+id/textViewBio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/oval_background"
-            android:backgroundTint="@color/black"
-            android:text="@string/enter_your_bio"
-            android:textColor="@color/white"
-            android:textSize="30sp" />
-
-        <EditText
-            android:id="@+id/editTextBio"
-            android:inputType="text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textViewBio"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="130dp"
-            android:layout_marginEnd="20dp"
-            android:backgroundTint="@color/black"
-            android:drawableStart="@drawable/ic_create"
-            android:drawableTint="@color/black"
-            android:hint="@string/type_your_bio_here"
-            android:maxLength="500"
-            android:textColor="@color/white"
-            android:textColorHint="#AFA5A5"
-            android:importantForAutofill="no"
-            tools:ignore="VisualLintTextFieldSize" />
-
-
-    </androidx.cardview.widget.CardView>
-
+    <!-- Change Profile Picture Button -->
     <Button
-        android:id="@+id/buttonSubmitBIO"
+        android:id="@+id/changeProfilePictureButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/BioCardView"
-        android:layout_marginStart="150dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="20dp"
-        android:text="@string/submit" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:text="@string/change_profile_picture" />
+
+    <!-- Username -->
+    <EditText
+        android:id="@+id/usernameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="@string/username"
+        android:textColorHint="@color/light_white"
+        android:inputType="text"
+        android:maxLines="1" />
+
+    <!-- Bio -->
+    <EditText
+        android:id="@+id/bioEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColorHint="@color/light_white"
+        android:hint="@string/bio"
+        android:inputType="textMultiLine"
+        android:maxLines="5" />
+
+    <!-- Website -->
+    <EditText
+        android:id="@+id/websiteEditText"
+        android:textColorHint="@color/light_white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="@string/your_website"
+        android:inputType="textUri"
+
+        android:maxLines="3" />
+    <EditText
+        android:id="@+id/PhoneEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColorHint="@color/light_white"
+        android:hint="phone number"
+        android:inputType="phone"
+        android:maxEms="15"/>
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switch1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/are_you_a_tutor"
+        android:textColor="@color/light_white"/>
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switch2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/are_you_a_student"
+        android:textColor="@color/light_white"/>
 
 
-</RelativeLayout>
+
+
+    <Button
+        android:id="@+id/saveProfileBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/save_changes" />
+
+</LinearLayout>

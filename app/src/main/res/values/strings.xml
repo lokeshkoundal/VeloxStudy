@@ -93,6 +93,14 @@
     <string name="receiver_profile_picture">receiver profile picture</string>
     <string name="status">status</string>
     <string name="message">Message</string>
+    <string name="are_you_a_student">Are you a Student?</string>
+    <string name="are_you_a_tutor">Are you a Tutor?</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="username">Username</string>
+    <string name="change_profile_picture">Change Profile Picture</string>
+    <string name="bio">Bio</string>
+    <string name="your_website">Your Website</string>
+    <string name="profile_picture">Profile picture</string>
 
 </resources>
 

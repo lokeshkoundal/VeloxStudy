@@ -8,8 +8,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,31 +26,32 @@ import java.util.Map;
 public class EditProfile extends AppCompatActivity {
 
     Button submitButton;
-    EditText editText;
-
+    EditText bioEt,usernameEt,WebsiteEt;
     TextView resultTv;
-
     FirebaseFirestore fireStore;
+    DocumentReference documentReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
-        submitButton = findViewById(R.id.buttonSubmitBIO);
-        editText = findViewById(R.id.editTextBio);
+        submitButton = findViewById(R.id.saveProfileBtn);
+        bioEt = findViewById(R.id.bioEditText);
         fireStore = FirebaseFirestore.getInstance();
-        resultTv = findViewById(R.id.resultextView);
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user != null) {
+            String uid = user.getUid();
+            documentReference = fireStore.collection("users").document(uid);
+        }
 
 
         submitButton.setOnClickListener(view -> {
 
-            String bio = editText.getText().toString();
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            String bio = bioEt.getText().toString();
 
-            if (user != null) {
-                String uid = user.getUid();
-                DocumentReference documentReference = fireStore.collection("users").document(uid);
 
                 documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
@@ -58,10 +62,33 @@ public class EditProfile extends AppCompatActivity {
                         usermap.put("Bio", bio);
 
                         if(document.exists())
-                            documentReference.update(usermap).addOnSuccessListener(unused -> resultTv.setText(R.string.BioSet));
+                            documentReference.update(usermap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(getApplicationContext(),R.string.BioSet,Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+
+                                }
+                            });
 
                         else
-                            documentReference.set(usermap).addOnSuccessListener(unused -> resultTv.setText(R.string.BioSet));
+                            documentReference.set(usermap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(getApplicationContext(),R.string.BioSet,Toast.LENGTH_SHORT).show();
+
+                                }
+
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+                                }
+                            });
 
 
 
@@ -69,8 +96,6 @@ public class EditProfile extends AppCompatActivity {
                     }
                 });
 
-
-            }
 
         });
 

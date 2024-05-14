@@ -6,13 +6,12 @@
 
     <ImageView
         android:id="@+id/pfpSender"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:src="@drawable/ic_profile"
         android:layout_centerVertical="true"
         android:layout_alignParentEnd="true"
         android:layout_margin="10dp"
-        android:background="@color/black"
         />
 
     <TextView
@@ -21,10 +20,18 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginStart="5dp"
+        android:textSize="18sp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="1dp"
+        style="@style/EditTextStyle"
         android:layout_marginBottom="5dp"
-        android:layout_toLeftOf="@id/pfpSender"
+        android:layout_toStartOf="@id/pfpSender"
+        android:textIsSelectable="true"
+        android:autoLink="web|email|phone"
+        android:linksClickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:textColorLink="#3A80EA"
         android:background="@drawable/sender_shape"
         android:padding="7dp"
         android:text="@string/lorem_ipsum"
