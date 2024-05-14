@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="18dp"
+    android:background="@color/greyApp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/greyApp">
+
+        <!-- Profile Picture -->
+        <ImageView
+            android:id="@+id/profilePicture"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_add_photo"
+            android:contentDescription="@string/profile_picture" />
+
+        <!-- Change Profile Picture Button -->
+        <Button
+            android:id="@+id/changeProfilePictureButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:text="@string/change_profile_picture"
+            android:textStyle="bold"/>
+
+        <!-- Username -->
+        <EditText
+            android:id="@+id/usernameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:autofillHints="name"
+            android:hint="@string/username"
+            android:inputType="text"
+            style="@style/EditTextStyle"
+            android:maxLines="1"
+            android:minHeight="48dp"
+            android:textColorHint="@color/light_white" />
+
+        <!-- Bio -->
+
+
+        <!-- Website -->
+        <EditText
+            android:id="@+id/websiteEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/your_website"
+            android:inputType="textUri"
+            android:linksClickable="false"
+            style="@style/EditTextStyle"
+            android:autoLink="web"
+            android:maxLines="3"
+            android:minHeight="48dp"
+            android:textColorHint="@color/light_white" />
+
+        <EditText
+            android:id="@+id/PhoneEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/EditTextStyle"
+            android:layout_marginTop="8dp"
+            android:autofillHints="phone"
+            android:hint="@string/phone_number"
+            android:inputType="phone"
+            android:maxEms="15"
+            android:maxLength="10"
+            android:minHeight="48dp"
+            android:textColorHint="@color/light_white" />
+
+        <EditText
+            android:id="@+id/bioEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/EditTextStyle"
+            android:layout_marginTop="8dp"
+            android:hint="@string/bio"
+            android:inputType="textMultiLine"
+            android:scrollbars="vertical"
+            android:maxLength="500"
+            android:minHeight="48dp"
+            android:textColorHint="@color/light_white" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/are_you_a_tutor"
+            android:textColor="@color/light_white"/>
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/are_you_a_student"
+            android:textColor="@color/light_white"/>
+
+
+        <Button
+            android:id="@+id/saveProfileBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Save"
+            android:textStyle="bold"/>
+
+
+
+    </LinearLayout>
+
+</ScrollView>

@@ -156,7 +156,7 @@ public class ChatActivity extends AppCompatActivity {
                                         .setValue(messages).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
-                                                chatRv.scrollToPosition(messagesArrayList.size() - 1);
+                                                chatRv.smoothScrollToPosition(messagesArrayList.size() - 1);
                                             }
                                         });
                             }

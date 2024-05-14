@@ -33,6 +33,7 @@ public class Login_Activity extends AppCompatActivity {
     String userName;
     String userMail;
     String  photoUrl;
+    DocumentReference docRef;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -105,7 +106,7 @@ public class Login_Activity extends AppCompatActivity {
                             userMail = user.getEmail();
                             photoUrl = String.valueOf(user.getPhotoUrl());
 
-                            DocumentReference docRef = fireStore.collection("users").document(uid);
+                            docRef = fireStore.collection("users").document(uid);
 
                             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                 @Override
@@ -133,15 +134,39 @@ public class Login_Activity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"Login Success !!",Toast.LENGTH_SHORT).show();
 
 
+                        //Intent iHome = new Intent(getApplicationContext(),MainActivity.class);
+
+
+                        Intent iForm = new Intent(getApplicationContext(),FormActivity.class);
                         Intent iHome = new Intent(getApplicationContext(),MainActivity.class);
 
                         SharedPreferences pref = getSharedPreferences("login",MODE_PRIVATE);
                         SharedPreferences.Editor editor = pref.edit();
-
                         editor.putBoolean("flag",true);
                         editor.apply();
-                        startActivity(iHome);
-                        finish();
+
+                        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot document = task.getResult();
+
+                                    if(document.exists()){
+                                        if(document.contains("OldUser")){
+                                            startActivity(iHome);
+                                            finish();
+                                        }
+                                        else{
+                                            startActivity(iForm);
+                                            finish();
+                                        }
+                                    }
+                                }
+                            }
+                        });
+
+
+
 
 
                     } else {

@@ -53,7 +53,6 @@ public class fragment_profile extends Fragment {
         editProfile = rootView.findViewById(R.id.editProfileButton);
         bioTv = rootView.findViewById(R.id.BioContentTextView);
 
-        Store = FirebaseFirestore.getInstance();
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -64,10 +63,10 @@ public class fragment_profile extends Fragment {
              photoUrl = user.getPhotoUrl();
         }
 
-            usernameTv.setText(displayName);
+        usernameTv.setText(displayName);
 
-
-                DocumentReference docRef = Store.collection("users").document(uid);
+        Store = FirebaseFirestore.getInstance();
+        DocumentReference docRef = Store.collection("users").document(uid);
 
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override

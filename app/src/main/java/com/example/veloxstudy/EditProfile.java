@@ -28,7 +28,6 @@ public class EditProfile extends AppCompatActivity {
 
     Button submitButton,cancelBtn;
     EditText bioEt,usernameEt,WebsiteEt;
-    TextView resultTv;
     FirebaseFirestore fireStore;
     DocumentReference documentReference;
 
@@ -41,6 +40,7 @@ public class EditProfile extends AppCompatActivity {
         bioEt = findViewById(R.id.bioEditText);
         usernameEt = findViewById(R.id.usernameEditText);
         cancelBtn = findViewById(R.id.CancelBtn);
+        WebsiteEt = findViewById(R.id.websiteEditText);
 
         fireStore = FirebaseFirestore.getInstance();
 
