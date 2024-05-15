@@ -1,162 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment_profile"
     android:background="@color/black">
 
-
-
-    <RelativeLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshProfile"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <ImageButton
-            android:id="@+id/settingsButton"
-            android:layout_width="38dp"
-            android:layout_height="38dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="9dp"
-            android:layout_marginEnd="9dp"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/settings"
-            android:src="@drawable/ic_settings"
-            tools:ignore="TouchTargetSizeCheck" />
-
-        <!-- User Photo -->
-        <ImageView
-            android:id="@+id/profilePhotoImageView"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
-            android:contentDescription="@string/pfp"/>
-
-        <!-- User Name -->
-        <TextView
-            android:id="@+id/usernameTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAllCaps="true"
-            android:textSize="20sp"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-            android:layout_below="@id/profilePhotoImageView"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="8dp"
-            android:background="?attr/selectableItemBackgroundBorderless"/>
-
-
-        <Button
-            android:id="@+id/editProfileButton"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:text="@string/edit_profile"
-            android:textColor="@color/white"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
-            android:padding="7dp"
-            android:layout_below="@+id/usernameTextView"
-            android:backgroundTint="#2C2C38"/>
-
-        <LinearLayout
-            android:id="@+id/folllow_layout"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="16dp"
-            android:layout_below="@+id/editProfileButton">
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/settingsButton"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="9dp"
+                android:layout_marginEnd="9dp"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/settings"
+                android:src="@drawable/ic_settings"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <!-- User Photo -->
+            <ImageView
+                android:id="@+id/profilePhotoImageView"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:contentDescription="@string/pfp"/>
+
+            <!-- User Name -->
+            <TextView
+                android:id="@+id/usernameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:layout_below="@id/profilePhotoImageView"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"/>
 
             <Button
-                android:id="@+id/btnFollowers"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/followers_0"
-                android:textColor="#FFFFFF"
-                android:padding="8dp"
-                android:layout_marginStart="40dp"
+                android:id="@+id/editProfileButton"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="@string/edit_profile"
+                android:textColor="@color/white"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:padding="7dp"
+                android:layout_below="@+id/usernameTextView"
                 android:backgroundTint="#2C2C38"/>
 
-            <!-- Spacer View for Centering -->
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-
-            <!-- Button for Following -->
-            <Button
-                android:id="@+id/btnFollowing"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/followings_0"
-                android:textColor="#FFFFFF"
-                android:padding="8dp"
-                android:layout_marginEnd="40dp"
-                android:backgroundTint="#2C2C38"/>
-
-        </LinearLayout>
-
-
-
-
-        <!-- User Portfolio -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/portfolioCardView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/folllow_layout"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            app:cardBackgroundColor="#2C2C38"
-            app:cardElevation="7dp"
-            app:cardCornerRadius="20dp">
-
-            <!-- Portfolio Information -->
-            <RelativeLayout
+            <LinearLayout
+                android:id="@+id/folllow_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp">
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:layout_below="@+id/editProfileButton">
 
-                <TextView
-                    android:id="@+id/portfolioTitleTextView"
+                <Button
+                    android:id="@+id/btnFollowers"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/followers_0"
+                    android:textColor="#FFFFFF"
+                    android:padding="8dp"
+                    android:layout_marginStart="40dp"
+                    android:backgroundTint="#2C2C38"/>
+
+                <!-- Spacer View for Centering -->
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <!-- Button for Following -->
+                <Button
+                    android:id="@+id/btnFollowing"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/followings_0"
+                    android:textColor="#FFFFFF"
+                    android:padding="8dp"
+                    android:layout_marginEnd="40dp"
+                    android:backgroundTint="#2C2C38"/>
+            </LinearLayout>
+
+            <!-- User Portfolio -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/portfolioCardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/folllow_layout"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:cardBackgroundColor="#2C2C38"
+                app:cardElevation="7dp"
+                app:cardCornerRadius="20dp">
+
+                <!-- Portfolio Information -->
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/your_bio"
-                    android:gravity="center"
-                    android:textSize="20sp"
-                    android:textColor="@android:color/darker_gray"
-                    android:textStyle="bold|italic"/>
+                    android:padding="16dp">
 
+                    <TextView
+                        android:id="@+id/portfolioTitleTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/your_bio"
+                        android:gravity="center"
+                        android:textSize="20sp"
+                        android:textColor="@android:color/darker_gray"
+                        android:textStyle="bold|italic"/>
 
-                <ScrollView
-                    android:layout_below="@+id/portfolioTitleTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    <ScrollView
+                        android:layout_below="@+id/portfolioTitleTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/BioContentTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:textAlignment="center"
-                    android:layout_marginTop="25dp" />
-
-                </ScrollView>
-
-            </RelativeLayout>
-
-        </androidx.cardview.widget.CardView>
-
-
-    </RelativeLayout>
-
+                        <TextView
+                            android:id="@+id/BioContentTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:textAlignment="center"
+                            android:layout_marginTop="25dp"/>
+                    </ScrollView>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </FrameLayout>

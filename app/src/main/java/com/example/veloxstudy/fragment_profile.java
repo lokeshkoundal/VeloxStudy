@@ -5,6 +5,11 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +31,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.Objects;
 
 public class fragment_profile extends Fragment {
-    String displayName;
     Button editProfile;
     View rootView;
 
@@ -53,17 +57,36 @@ public class fragment_profile extends Fragment {
         editProfile = rootView.findViewById(R.id.editProfileButton);
         bioTv = rootView.findViewById(R.id.BioContentTextView);
 
+        SwipeRefreshLayout swipeRefreshLayout = rootView.findViewById(R.id.swipeRefreshProfile);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipeRefreshLayout.setRefreshing(false);
+                        FragmentManager fragmentManager = getFragmentManager();
+                        if (fragmentManager != null) {
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.frame, new fragment_profile());
+                            fragmentTransaction.commitAllowingStateLoss();
+                        }
+                    }
+                }, 1000);
+            }
+        });
+
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null) {
 
              uid = user.getUid();
-             displayName = user.getDisplayName();
              photoUrl = user.getPhotoUrl();
         }
 
-        usernameTv.setText(displayName);
+
 
         Store = FirebaseFirestore.getInstance();
         DocumentReference docRef = Store.collection("users").document(uid);
@@ -76,21 +99,16 @@ public class fragment_profile extends Fragment {
                     DocumentSnapshot document = task.getResult();
 
                     if (document.exists()) {
-                        if(document.contains("Bio")) {
+
                             String BioReceived = Objects.requireNonNull(document.get("Bio")).toString();
+                            String usernameReceived = Objects.requireNonNull(document.get("Name")).toString();
                             bioTv.setText(BioReceived);
-                        }
+                            usernameTv.setText(usernameReceived);
 
 
-                    } else {
-                        //  bioTv.setTextColor(ContextCompat.getColor(requireActivity(), R.color.white));
-                        bioTv.setGravity(Gravity.CENTER);
-                        bioTv.setText(R.string.Bio_not_set);
+
+
                     }
-                } else {
-                    // bioTv.setTextColor(ContextCompat.getColor(requireActivity(), R.color.no_bio));
-                    bioTv.setGravity(Gravity.CENTER);
-                    bioTv.setText(R.string.Bio_not_set);
                 }
             }
                 });

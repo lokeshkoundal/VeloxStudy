@@ -2,9 +2,13 @@ package com.example.veloxstudy;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,6 +60,27 @@ public class fragment_explore extends Fragment {
         RecyclerAdapter adapter = new RecyclerAdapter(requireContext(),arrModel);
         recyclerView.setAdapter(adapter);
 
+        SwipeRefreshLayout swipeRefreshLayout = rootView.findViewById(R.id.swipeRefreshExplore);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipeRefreshLayout.setRefreshing(false);
+                        Fragment currentFragment = getFragmentManager().findFragmentById(R.id.frame);
+                        FragmentManager fragmentManager = getFragmentManager();
+                        if (fragmentManager != null) {
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.frame, new fragment_explore());
+                            fragmentTransaction.commitAllowingStateLoss();
+                        }
+                    }
+                }, 1000);
+            }
+        });
+
         return rootView;
     }
 
@@ -71,8 +96,16 @@ public class fragment_explore extends Fragment {
                             String email = document.getString("Email");
                             String uid = document.getId();
 
-                            Model model = new Model(pfp, name, email,uid);
-                            arrModel.add(model);
+                           FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+
+                            assert user != null;
+                            String id = user.getUid();
+
+                            if(!uid.equals(id)) {
+                                Model model = new Model(pfp, name, email,id);
+                                arrModel.add(model);
+                            }
                         }
 
                         RecyclerAdapter adapter = new RecyclerAdapter(requireContext(), arrModel);

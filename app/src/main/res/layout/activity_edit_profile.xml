@@ -41,6 +41,7 @@
         android:hint="@string/username"
         android:inputType="text"
         style="@style/EditTextStyle"
+        android:maxLength="18"
         android:maxLines="1"
         android:minHeight="48dp"
         android:textColorHint="@color/light_white" />

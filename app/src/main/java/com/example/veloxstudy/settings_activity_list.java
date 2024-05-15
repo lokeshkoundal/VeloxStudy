@@ -1,5 +1,6 @@
 package com.example.veloxstudy;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,9 +16,16 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Objects;
 
 public class settings_activity_list extends AppCompatActivity {
 
@@ -34,84 +42,98 @@ public class settings_activity_list extends AppCompatActivity {
         TextView username_settings = findViewById(R.id.textViewSetting);
         lv = findViewById(R.id.listVIewSettings);
 
-        pfpSetting = findViewById(R.id.profilePhotoImageView);
 
+        FirebaseFirestore Store = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        assert user != null;
+        String uid = user.getUid();
 
-        if (user != null) {
-            for (UserInfo profile : user.getProviderData()) {
+        DocumentReference docRef = Store.collection("users").document(uid);
 
-                Uri photoUrl = profile.getPhotoUrl();
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
-                username_settings.setText(profile.getDisplayName());
-                if (photoUrl != null) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
 
-                    Glide.with(this)
-                            .load(photoUrl)
-                            .apply(RequestOptions.circleCropTransform())
-                            .into(pfpSetting);
-                } else {
-                    pfpSetting.setImageResource(R.drawable.ic_profile);
+                    if (document.exists()) {
+                        String usernameReceived = Objects.requireNonNull(document.get("Name")).toString();
+                        username_settings.setText(usernameReceived);
+
+                    }
                 }
 
-
-            }
-        }
-
-        ArrayAdapter<String> adapterList = new ArrayAdapter<>(getApplicationContext(),R.layout.textviewsetting,arr);
-        lv.setAdapter(adapterList);
+                pfpSetting = findViewById(R.id.profilePhotoImageView);
 
 
-        lv.setOnItemClickListener((adapterView, view, position, l) -> {
+                for (UserInfo profile : user.getProviderData()) {
 
-            if(position==4){
-                Intent iContactus = new Intent(getApplicationContext(),ContactUs.class);
-                startActivity(iContactus);
+                    Uri photoUrl = profile.getPhotoUrl();
 
-            }
+                    if (photoUrl != null) {
 
-            if(position==5){
-                Intent iPrivacy = new Intent(getApplicationContext(),PrivacyPolicy.class);
-                startActivity(iPrivacy);
-            }
-
-            if(position==6){
-
-                AlertDialog.Builder logoutDialog = new AlertDialog.Builder(settings_activity_list.this);
-                logoutDialog.setTitle("Log out?");
-                logoutDialog.setMessage("Do you want to Log out?");
-                logoutDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        FirebaseAuth.getInstance().signOut();
-
-
-                        SharedPreferences pref = getSharedPreferences("login",MODE_PRIVATE);
-                        SharedPreferences.Editor editor = pref.edit();
-                        editor.putBoolean("flag",false);
-                        editor.apply();
-
-                        Intent iLogin = new Intent(getApplicationContext(),Login_Activity.class);
-                        startActivity(iLogin);
-
-                        finishAffinity();
+                        Glide.with(getApplicationContext())
+                                .load(photoUrl)
+                                .apply(RequestOptions.circleCropTransform())
+                                .into(pfpSetting);
+                    } else {
+                        pfpSetting.setImageResource(R.drawable.ic_profile);
                     }
-                });
 
-                logoutDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+
+                }
+                ArrayAdapter<String> adapterList = new ArrayAdapter<>(getApplicationContext(), R.layout.textviewsetting, arr);
+                lv.setAdapter(adapterList);
+
+
+                lv.setOnItemClickListener((adapterView, view, position, l) -> {
+
+                    if (position == 4) {
+                        Intent iContactus = new Intent(getApplicationContext(), ContactUs.class);
+                        startActivity(iContactus);
 
                     }
+
+                    if (position == 5) {
+                        Intent iPrivacy = new Intent(getApplicationContext(), PrivacyPolicy.class);
+                        startActivity(iPrivacy);
+                    }
+
+                    if (position == 6) {
+
+                        AlertDialog.Builder logoutDialog = new AlertDialog.Builder(settings_activity_list.this);
+                        logoutDialog.setTitle("Log out?");
+                        logoutDialog.setMessage("Do you want to Log out?");
+                        logoutDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                FirebaseAuth.getInstance().signOut();
+
+
+                                SharedPreferences pref = getSharedPreferences("login", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = pref.edit();
+                                editor.putBoolean("flag", false);
+                                editor.apply();
+
+                                Intent iLogin = new Intent(getApplicationContext(), Login_Activity.class);
+                                startActivity(iLogin);
+
+                                finishAffinity();
+                            }
+                        });
+
+                        logoutDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+
+                        logoutDialog.show();
+                    }
                 });
-
-                logoutDialog.show();
-
             }
-
         });
-
-
-
     }
 }
