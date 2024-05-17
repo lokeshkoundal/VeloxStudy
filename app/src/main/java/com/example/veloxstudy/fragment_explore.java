@@ -68,13 +68,7 @@ public class fragment_explore extends Fragment {
                     @Override
                     public void run() {
                         swipeRefreshLayout.setRefreshing(false);
-                        Fragment currentFragment = getFragmentManager().findFragmentById(R.id.frame);
-                        FragmentManager fragmentManager = getFragmentManager();
-                        if (fragmentManager != null) {
-                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                            fragmentTransaction.replace(R.id.frame, new fragment_explore());
-                            fragmentTransaction.commitAllowingStateLoss();
-                        }
+                      // fetchAllUsersData();
                     }
                 }, 1000);
             }

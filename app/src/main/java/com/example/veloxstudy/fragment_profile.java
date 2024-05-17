@@ -33,8 +33,10 @@ import java.util.Objects;
 public class fragment_profile extends Fragment {
     Button editProfile;
     View rootView;
+    ImageButton imageButton;
 
-    TextView bioTv;
+    TextView bioTv,usernameTv;
+    ImageView pfp;
     FirebaseFirestore Store;
     String uid;
 
@@ -51,9 +53,9 @@ public class fragment_profile extends Fragment {
 
         rootView = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        ImageButton imageButton = rootView.findViewById(R.id.settingsButton);
-        TextView usernameTv = rootView.findViewById(R.id.usernameTextView);
-        ImageView pfp = rootView.findViewById(R.id.profilePhotoImageView);
+         imageButton = rootView.findViewById(R.id.settingsButton);
+        usernameTv = rootView.findViewById(R.id.usernameTextView);
+        pfp = rootView.findViewById(R.id.profilePhotoImageView);
         editProfile = rootView.findViewById(R.id.editProfileButton);
         bioTv = rootView.findViewById(R.id.BioContentTextView);
 
@@ -66,12 +68,7 @@ public class fragment_profile extends Fragment {
                     @Override
                     public void run() {
                         swipeRefreshLayout.setRefreshing(false);
-                        FragmentManager fragmentManager = getFragmentManager();
-                        if (fragmentManager != null) {
-                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                            fragmentTransaction.replace(R.id.frame, new fragment_profile());
-                            fragmentTransaction.commitAllowingStateLoss();
-                        }
+                        fetchData();
                     }
                 }, 1000);
             }
@@ -87,42 +84,10 @@ public class fragment_profile extends Fragment {
         }
 
 
-
         Store = FirebaseFirestore.getInstance();
         DocumentReference docRef = Store.collection("users").document(uid);
 
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-
-                    if (document.exists()) {
-
-                            String BioReceived = Objects.requireNonNull(document.get("Bio")).toString();
-                            String usernameReceived = Objects.requireNonNull(document.get("Name")).toString();
-                            bioTv.setText(BioReceived);
-                            usernameTv.setText(usernameReceived);
-
-
-
-
-                    }
-                }
-            }
-                });
-
-
-                if (photoUrl != null) {
-                    // Load the photo into the ImageView using Glide
-                    Glide.with(this)
-                            .load(photoUrl)
-                            .apply(RequestOptions.circleCropTransform())
-                            .into(pfp);
-                } else {
-                    pfp.setImageResource(R.drawable.ic_profile);
-                }
+        fetchData();
 
 
 
@@ -140,5 +105,41 @@ public class fragment_profile extends Fragment {
 
         return rootView;
 
+    }
+    void fetchData(){
+        Store = FirebaseFirestore.getInstance();
+        DocumentReference docRef = Store.collection("users").document(uid);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+
+                    if (document.exists()) {
+
+                        String BioReceived = Objects.requireNonNull(document.get("Bio")).toString();
+                        String usernameReceived = Objects.requireNonNull(document.get("Name")).toString();
+                        bioTv.setText(BioReceived);
+                        usernameTv.setText(usernameReceived);
+
+
+
+                    }
+                }
+            }
+        });
+
+
+        if (photoUrl != null) {
+            // Load the photo into the ImageView using Glide
+            Glide.with(this)
+                    .load(photoUrl)
+                    .apply(RequestOptions.circleCropTransform())
+                    .into(pfp);
+        } else {
+            pfp.setImageResource(R.drawable.ic_profile);
+        }
     }
 }

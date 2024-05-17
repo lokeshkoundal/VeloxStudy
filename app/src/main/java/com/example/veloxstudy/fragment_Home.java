@@ -37,13 +37,9 @@ public class fragment_Home extends Fragment {
                     @Override
                     public void run() {
                         swipeRefreshLayout.setRefreshing(false);
-                        Fragment currentFragment = getFragmentManager().findFragmentById(R.id.frame);
-                        FragmentManager fragmentManager = getFragmentManager();
-                        if (fragmentManager != null) {
-                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                            fragmentTransaction.replace(R.id.frame, new fragment_Home());
-                            fragmentTransaction.commitAllowingStateLoss();
-                        }
+
+                        //RefreshCode
+
                     }
                 }, 1000);
             }

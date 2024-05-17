@@ -62,12 +62,7 @@ public class fragment_chat extends Fragment {
                     @Override
                     public void run() {
                         swipeRefreshLayout.setRefreshing(false);
-                        FragmentManager fragmentManager = getFragmentManager();
-                        if (fragmentManager != null) {
-                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                            fragmentTransaction.replace(R.id.frame, new fragment_chat());
-                            fragmentTransaction.commitAllowingStateLoss();
-                        }
+                        //fetchAllUsersData();
                     }
                 }, 1000);
             }
