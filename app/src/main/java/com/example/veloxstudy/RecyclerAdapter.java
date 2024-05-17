@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -18,19 +19,20 @@ import java.util.ArrayList;
 
 public class RecyclerAdapter extends RecyclerView.Adapter <RecyclerAdapter.ViewHolder>{
     Context context;
+    boolean fragment;
     ArrayList<Model> arrPopular;
 
-    RecyclerAdapter(Context context, ArrayList<Model> arrPopular){
+    RecyclerAdapter(Context context, ArrayList<Model> arrPopular,boolean fragment){
         this.context = context;
         this.arrPopular = arrPopular;
+        this.fragment = fragment;
 
     }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
        View view = LayoutInflater.from(context).inflate(R.layout.recycler_popular,parent,false);
-       ViewHolder viewHolder = new ViewHolder(view);
-       return viewHolder;
+        return new ViewHolder(view);
 
     }
 
@@ -45,17 +47,19 @@ public class RecyclerAdapter extends RecyclerView.Adapter <RecyclerAdapter.ViewH
                 .into(holder.imgTv);
 
 
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context,ChatActivity.class);
-                String uri = (arrPopular.get(position).img).toString();
 
-                intent.putExtra("name",arrPopular.get(position).name);
-                intent.putExtra("img",uri);
-                intent.putExtra("uid",arrPopular.get(position).uid);
-                context.startActivity(intent);
+                if(!fragment) {
+                    Intent intent = new Intent(context, ChatActivity.class);
+                    String uri = (arrPopular.get(position).img).toString();
+
+                    intent.putExtra("name", arrPopular.get(position).name);
+                    intent.putExtra("img", uri);
+                    intent.putExtra("uid", arrPopular.get(position).uid);
+                    context.startActivity(intent);
+                }
 
 
             }

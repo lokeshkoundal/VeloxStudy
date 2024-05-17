@@ -36,8 +36,7 @@ public class fragment_explore extends Fragment {
 
   // public static boolean fetchFlag;
 
-    public fragment_explore(){
-    }
+    public fragment_explore(){}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,13 +50,13 @@ public class fragment_explore extends Fragment {
         FireStore = FirebaseFirestore.getInstance();
         arrModel = new ArrayList<>();
 
+        //  fetchFlag = true;
 
-      //  fetchFlag = true;
         fetchAllUsersData();
 
-     //   fetchFlag = false;
+        //   fetchFlag = false;
 
-        RecyclerAdapter adapter = new RecyclerAdapter(requireContext(),arrModel);
+        RecyclerAdapter adapter = new RecyclerAdapter(requireContext(),arrModel,true);
         recyclerView.setAdapter(adapter);
 
         SwipeRefreshLayout swipeRefreshLayout = rootView.findViewById(R.id.swipeRefreshExplore);
@@ -108,7 +107,7 @@ public class fragment_explore extends Fragment {
                             }
                         }
 
-                        RecyclerAdapter adapter = new RecyclerAdapter(requireContext(), arrModel);
+                        RecyclerAdapter adapter = new RecyclerAdapter(requireContext(), arrModel,true);
                         recyclerView.setAdapter(adapter);
                     } else {
                         Toast.makeText(requireContext(),"Error fetching data",Toast.LENGTH_SHORT).show();

@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         loadFrag(new fragment_Home(), false);
 
 
+
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {

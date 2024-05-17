@@ -50,7 +50,7 @@ public class fragment_chat extends Fragment {
 
         fetchAllUsersData();
 
-        RecyclerAdapter adapter = new RecyclerAdapter(requireContext(),arrModel);
+        RecyclerAdapter adapter = new RecyclerAdapter(requireContext(),arrModel,false);
         recyclerView.setAdapter(adapter);
 
         SwipeRefreshLayout swipeRefreshLayout = rootView.findViewById(R.id.swipeRefreshChat);
@@ -97,7 +97,7 @@ public class fragment_chat extends Fragment {
                             }
                         }
 
-                        RecyclerAdapter adapter = new RecyclerAdapter(requireContext(), arrModel);
+                        RecyclerAdapter adapter = new RecyclerAdapter(requireContext(), arrModel,false);
                         recyclerView.setAdapter(adapter);
                     } else {
                         Log.d("TAG","Task Failed");
