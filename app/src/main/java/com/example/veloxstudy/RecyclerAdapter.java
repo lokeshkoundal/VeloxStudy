@@ -1,5 +1,6 @@
 package com.example.veloxstudy;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -9,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -37,7 +37,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter <RecyclerAdapter.ViewH
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.nameTv.setText(arrPopular.get(position).name);
         //holder.imgTv.setImageURI(arrPopular.get(position).img);
         holder.emailTv.setText(arrPopular.get(position).email);
@@ -62,6 +62,19 @@ public class RecyclerAdapter extends RecyclerView.Adapter <RecyclerAdapter.ViewH
                 }
 
 
+                if(fragment){
+
+                    Intent intent = new Intent(context,ProfileView.class);
+                    String uri = (arrPopular.get(position).img).toString();
+
+                    intent.putExtra("uid", arrPopular.get(position).uid);
+                    intent.putExtra("name", arrPopular.get(position).name);
+                    intent.putExtra("img", uri);
+
+                    context.startActivity(intent);
+
+
+                }
             }
         });
     }
@@ -74,7 +87,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter <RecyclerAdapter.ViewH
 
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView nameTv,emailTv;
         ImageView imgTv;
 
