@@ -103,6 +103,8 @@
     <string name="profile_picture">Profile picture</string>
     <string name="phone_number">phone number</string>
     <string name="cancel">Cancel</string>
+    <string name="tutor">Tutor</string>
+    <string name="student">Student</string>
 
 </resources>
 
