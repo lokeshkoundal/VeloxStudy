@@ -78,7 +78,7 @@
     <string name="phone">Phone :\n +91–1938 884 723</string>
     <string name="notification_button">notification_button</string>
     <string name="upcoming_classes">Upcoming Classes</string>
-    <string name="no_class_is_scheduled_yet">No class is scheduled yet.</string>
+    <string name="no_class_is_scheduled_yet">no class is scheduled yet.</string>
     <string name="welcome_to_veloxstudy">Welcome to VeloxStudy</string>
     <string name="welcome_photo">Welcome photo</string>
     <string name="create_a_chat">create a chat</string>
@@ -87,7 +87,7 @@
     <string name="pfp">pfp</string>
     <string name="settings">Settings</string>
     <string name="followers_0">Followers 0</string>
-    <string name="followings_0">Followings 0</string>
+    <string name="followings_0">Following 0</string>
     <string name="your_bio">Your Bio</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="receiver_profile_picture">receiver profile picture</string>
@@ -105,6 +105,11 @@
     <string name="cancel">Cancel</string>
     <string name="tutor">Tutor</string>
     <string name="student">Student</string>
+    <string name="add_reminder">add reminder</string>
+    <string name="class_name">Class Name</string>
+    <string name="tutor_name">Tutor Name</string>
+    <string name="date_and_time">Date and time</string>
+    <string name="countdown">Countdown</string>
 
 </resources>
 

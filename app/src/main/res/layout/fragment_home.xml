@@ -17,7 +17,8 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginTop="18dp"
-            android:layout_marginStart="342dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="16dp"
             android:src="@drawable/ic_notification"
             android:background="@color/black"
             android:contentDescription="@string/notification_button"/>
@@ -31,78 +32,92 @@
             android:fontFamily="cursive"
             android:text="@string/app_name"
             android:textColor="@color/white"
-            android:textSize="35sp"/>
+            android:textSize="35sp"
+            tools:ignore="RelativeOverlap" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/firstcvHome"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="match_parent"
             android:layout_below="@+id/tvAppNameHome"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="19dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:backgroundTint="@color/greyApp"
             android:elevation="40dp"
             app:cardCornerRadius="8dp">
 
-            <TextView
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:text="@string/upcoming_classes"
-                android:textAlignment="center"
-                android:textColor="#C1B8B8"
-                android:textSize="25sp"
-                android:textStyle="bold" />
+                android:layout_height="match_parent"
+                android:padding="10dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="80dp"
-                android:layout_marginTop="70dp"
-                android:fontFamily="sans-serif-smallcaps"
-                android:text="@string/no_class_is_scheduled_yet"
-                android:textColor="#FBBD03"
-                android:textSize="18sp" />
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/firstcvHome"
-            android:layout_marginTop="5dp"
-            android:backgroundTint="@color/greyApp"
-            android:elevation="20dp"
-            android:padding="20dp"
-            app:cardCornerRadius="15dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/welcome_to_veloxstudy"
-                android:textAlignment="center"
-                android:textSize="26sp"
-                android:textStyle="bold"
-                android:textColor="#C1B8B8"
-                android:layout_marginTop="8dp" />
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="380dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="100dp"
-                android:layout_marginEnd="20dp"
-                android:elevation="15dp"
-                app:cardCornerRadius="15dp">
-
-                <ImageView
+                <TextView
+                    android:id="@+id/upcomingClassesLabel"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/imgwelcome"
-                    android:contentDescription="@string/welcome_photo"/>
-            </androidx.cardview.widget.CardView>
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/aclonica"
+                    android:text="@string/upcoming_classes"
+                    android:textAlignment="center"
+                    android:textColor="@color/light_white"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/upcomingRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/upcomingClassesLabel"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="wrap"/>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/animeIv"
+                    android:visibility="gone"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_gravity="center"
+                    android:alpha="0.6"
+                    android:src="@drawable/anime_study"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/noClassTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:text="@string/no_class_is_scheduled_yet"
+                    android:textColor="#FBBD03"
+                    android:textSize="18sp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+                <Button
+                    android:id="@+id/addReminderButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/add_reminder"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/black"
+                    android:fontFamily="sans-serif-smallcaps"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="16dp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

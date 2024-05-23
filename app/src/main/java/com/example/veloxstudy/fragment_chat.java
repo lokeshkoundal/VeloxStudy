@@ -4,8 +4,6 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -28,7 +26,6 @@ public class fragment_chat extends Fragment {
     RecyclerView recyclerView;
     FirebaseFirestore FireStore;
     ArrayList<Model> arrModel;
-    String currentCollection;
 
     FirebaseUser user;
 

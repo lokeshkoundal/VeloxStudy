@@ -22,7 +22,6 @@ public class fragment_explore extends Fragment {
     FirebaseFirestore FireStore;
     ArrayList<Model> arrModel;
 
-  // public static boolean fetchFlag;
 
     public fragment_explore(){}
 
@@ -38,11 +37,7 @@ public class fragment_explore extends Fragment {
         FireStore = FirebaseFirestore.getInstance();
         arrModel = new ArrayList<>();
 
-        //  fetchFlag = true;
-
         fetchAllUsersData();
-
-        //   fetchFlag = false;
 
         RecyclerAdapter adapter = new RecyclerAdapter(requireContext(),arrModel,true);
         recyclerView.setAdapter(adapter);

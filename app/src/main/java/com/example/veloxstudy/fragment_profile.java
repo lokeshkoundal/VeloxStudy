@@ -2,15 +2,10 @@ package com.example.veloxstudy;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.os.Handler;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +19,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserInfo;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -43,9 +37,7 @@ public class fragment_profile extends Fragment {
     Uri photoUrl;
 
 
-    public fragment_profile() {
-        // Required empty public constructor
-    }
+    public fragment_profile() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -85,7 +77,7 @@ public class fragment_profile extends Fragment {
 
 
         Store = FirebaseFirestore.getInstance();
-        DocumentReference docRef = Store.collection("users").document(uid);
+        //DocumentReference docRef = Store.collection("users").document(uid);
 
         fetchData();
 

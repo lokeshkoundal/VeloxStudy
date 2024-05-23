@@ -44,7 +44,6 @@ public class Login_Activity extends AppCompatActivity {
         fireStore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
 
-        // Configure Google Sign-In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -55,7 +54,6 @@ public class Login_Activity extends AppCompatActivity {
         SignInButton signInButton = findViewById(R.id.googleBtn);
 
         signInButton.setOnClickListener(view -> {
-            // Call the method to initiate Google Sign-In
             signInWithGoogle(mGoogleSignInClient);
         });
 
@@ -132,9 +130,6 @@ public class Login_Activity extends AppCompatActivity {
                       }
 
                         Toast.makeText(getApplicationContext(),"Login Success !!",Toast.LENGTH_SHORT).show();
-
-
-                        //Intent iHome = new Intent(getApplicationContext(),MainActivity.class);
 
 
                         Intent iForm = new Intent(getApplicationContext(),FormActivity.class);
