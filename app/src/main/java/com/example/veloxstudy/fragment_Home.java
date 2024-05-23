@@ -1,14 +1,15 @@
 package com.example.veloxstudy;
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,6 +24,8 @@ public class fragment_Home extends Fragment {
     RecyclerView recyclerView;
     FirebaseFirestore FireStore;
     ArrayList<Model2> arrModel;
+
+    Button addReminderBtn;
 
     CircleImageView animeIv;
     TextView noClassTv;
@@ -44,6 +47,7 @@ public class fragment_Home extends Fragment {
 
         animeIv = view.findViewById(R.id.animeIv);
         noClassTv = view.findViewById(R.id.noClassTv);
+        addReminderBtn = view.findViewById(R.id.addReminderButton);
         SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipeRefreshHome);
         recyclerView  = view.findViewById(R.id.upcomingRv);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -61,6 +65,8 @@ public class fragment_Home extends Fragment {
                     @Override
                     public void run() {
                         swipeRefreshLayout.setRefreshing(false);
+                        arrModel.clear();
+                        fetchData();
 
                         //RefreshCode
 
@@ -75,20 +81,29 @@ public class fragment_Home extends Fragment {
                 R.color.white
         );
 
+        addReminderBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(requireContext(), AddReminder.class);
+                startActivity(intent);
+            }
+        });
+
         return view;
     }
     private void fetchData(){
-        FireStore.collection("reminders").document("lokii").collection( "lokiix")
+        FireStore.collection("reminders").document(uid).collection( "data").orderBy("createdAt")
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : task.getResult()) {
 
                             String className = document.getString("Classname");
-                            String timeStamp = document.getString("Timestamp");
+                            String time = document.getString("Time");
+                            String date = document.getString("Date");
                             String tutorName = document.getString("Tutorname");
 
-                            Model2 model2 = new Model2(className,tutorName,timeStamp);
+                            Model2 model2 = new Model2(className,tutorName,time,date);
                             arrModel.add(model2);
                         }
 
@@ -96,10 +111,13 @@ public class fragment_Home extends Fragment {
                             animeIv.setVisibility(View.VISIBLE);
                             noClassTv.setVisibility(View.VISIBLE);
                         }
+                        else{
+                            animeIv.setVisibility(View.GONE);
+                            noClassTv.setVisibility(View.GONE);
+                        }
 
                         RecyclerReminder adapter = new RecyclerReminder(requireContext(), arrModel);
                         recyclerView.setAdapter(adapter);
-                        Log.e("TAG","Reached here");
 
                     } else {
                         Toast.makeText(requireContext(),"Error fetching data",Toast.LENGTH_SHORT).show();

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/greyApp"
+    android:id="@+id/scrollViewReminder">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_a_reminder"
+            android:textAlignment="center"
+            android:background="@color/black"
+            android:fontFamily="@font/alegreya_sans_sc_bold_italic"
+            android:textColor="@color/white"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Class Name Input -->
+        <TextView
+            android:id="@+id/classNameLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/class_name"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintBottom_toTopOf="@id/classNameInput"
+            android:layout_marginTop="30dp"/>
+
+        <EditText
+            android:id="@+id/classNameInput"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_class_name"
+            android:inputType="text"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/light_white"
+            android:backgroundTint="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/classNameLabel"
+            app:layout_constraintBottom_toTopOf="@id/tutorNameLabel"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <!-- Tutor Name Input -->
+        <TextView
+            android:id="@+id/tutorNameLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tutor_name"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/classNameInput"
+            app:layout_constraintBottom_toTopOf="@id/tutorNameInput"
+            android:layout_marginTop="16dp"/>
+
+        <EditText
+            android:id="@+id/tutorNameInput"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_tutor_name"
+            android:inputType="text"
+            android:textColor="@color/white"
+            android:textColorHint="@color/light_white"
+            android:backgroundTint="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tutorNameLabel"
+            app:layout_constraintBottom_toTopOf="@id/dateLabel"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <!-- Date Input -->
+        <TextView
+            android:id="@+id/dateLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/date"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tutorNameInput"
+            app:layout_constraintBottom_toTopOf="@id/dateInput"
+            android:layout_marginTop="16dp"/>
+
+        <DatePicker
+            android:id="@+id/dateInput"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/select_date"
+            android:inputType="date"
+            android:textColor="@color/white"
+            android:textColorHint="@color/light_white"
+            android:backgroundTint="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dateLabel"/>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dateInput" />
+
+        <TimePicker
+            android:layout_marginTop="16dp"
+            android:id="@+id/timePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+
+        <!-- Save Button -->
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/save"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/timePicker"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

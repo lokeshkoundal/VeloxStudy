@@ -106,9 +106,10 @@ public class ChatActivity extends AppCompatActivity {
                 }
                 messagesAdapter.notifyDataSetChanged();
 
-                if (messagesArrayList.isEmpty()) {
+                if (messagesArrayList.isEmpty())
                     startConvo.setVisibility(View.VISIBLE);
-                }
+                else
+                    startConvo.setVisibility(View.GONE);
 
             }
 
