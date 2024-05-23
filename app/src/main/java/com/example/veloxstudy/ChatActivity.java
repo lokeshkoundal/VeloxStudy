@@ -104,12 +104,13 @@ public class ChatActivity extends AppCompatActivity {
                     MsgModel messages = dataSnapshot.getValue(MsgModel.class);
                     messagesArrayList.add(messages);
                 }
-                messagesAdapter.notifyDataSetChanged();
-
                 if (messagesArrayList.isEmpty())
                     startConvo.setVisibility(View.VISIBLE);
                 else
                     startConvo.setVisibility(View.GONE);
+                messagesAdapter.notifyDataSetChanged();
+
+
 
             }
 
