@@ -87,9 +87,11 @@ public class AddReminder extends AppCompatActivity {
                 String time = timeFormat.format(selectedTime.getTime());
 
 
+                if (classname.isEmpty() || tutorname.isEmpty() || date.isEmpty() || time.isEmpty())
+                    Toast.makeText(getApplicationContext(), "Please add data correctly", Toast.LENGTH_SHORT).show();
 
-                storeData(classname,tutorname,date,time);
-
+                else
+                    storeData(classname,tutorname,date,time);
 
             }
         });
@@ -115,34 +117,33 @@ public class AddReminder extends AppCompatActivity {
 
                 DocumentSnapshot document = task.getResult();
                 Map<String, Object> usermap = null;
-                if (classname.isEmpty() || tutorName.isEmpty() || date.isEmpty() || time.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Please add data correctly", Toast.LENGTH_SHORT).show();
-                } else {
+
+
                     usermap = new HashMap<>();
                     usermap.put("Classname", classname);
                     usermap.put("Tutorname", tutorName);
                     usermap.put("Time", time);
                     usermap.put("Date", date);
                     usermap.put("createdAt", FieldValue.serverTimestamp());
+
+
+                    documentReference.set(usermap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(getApplicationContext(), "Reminder set", Toast.LENGTH_SHORT).show();
+                            finish();
+
+                        }
+
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
-
-                assert usermap != null;
-                documentReference.set(usermap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(getApplicationContext(), "Reminder set", Toast.LENGTH_SHORT).show();
-                        finish();
-
-                    }
-
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
             }
-        });
+        );
 
 
     }
