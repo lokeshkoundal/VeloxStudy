@@ -17,3 +17,6 @@ VeloxStudy is an on-demand learning Android app designed to connect students and
 - Firebase Firestore
 - Firebase Authentication
 - Firebase Realtime Database
+
+##Download apk
+https://github.com/lokeshkoundal/VeloxStudy/VeloxStudy.apk
