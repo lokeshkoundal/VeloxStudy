@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/pfpSender"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:src="@drawable/ic_profile"
         android:layout_centerVertical="true"
         android:layout_alignParentEnd="true"
         android:layout_margin="10dp"
-        />
+        android:contentDescription="@string/profile_picture" />
 
     <TextView
         android:id="@+id/senderText"

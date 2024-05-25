@@ -2,9 +2,6 @@ package com.example.veloxstudy;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -58,42 +53,23 @@ public class RecyclerReminder extends RecyclerView.Adapter <RecyclerReminder.Vie
         DocumentReference docRef = db.collection("reminders").document(uid).collection("data").document(DocName);
 
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        holder.itemView.setOnClickListener(v -> {
 
-                AlertDialog.Builder logoutDialog = new AlertDialog.Builder(context);
-                logoutDialog.setTitle("Delete this reminder?");
-                logoutDialog.setMessage("Are you sure you want delete this reminder?");
-                logoutDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        docRef.delete()
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        // Document successfully deleted
-                                        Toast.makeText( context,"Reminder deleted !", Toast.LENGTH_SHORT).show();
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText( context,"Reminder couldn't be deleted !", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                    }
-                });
+            AlertDialog.Builder logoutDialog = new AlertDialog.Builder(context);
+            logoutDialog.setTitle("Delete this reminder?");
+            logoutDialog.setMessage("Are you sure you want delete this reminder?");
+            logoutDialog.setPositiveButton("Yes", (dialog, which) -> docRef.delete()
+                    .addOnSuccessListener(aVoid -> {
+                        // Document successfully deleted
+                        Toast.makeText( context,"Reminder deleted !", Toast.LENGTH_SHORT).show();
+                    })
+                    .addOnFailureListener(e -> Toast.makeText( context,"Reminder couldn't be deleted !", Toast.LENGTH_SHORT).show()));
 
-                logoutDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+            logoutDialog.setNegativeButton("No", (dialog, which) -> {
 
-                    }
-                });
+            });
 
-                logoutDialog.show();
-            }
+            logoutDialog.show();
         });
 
 

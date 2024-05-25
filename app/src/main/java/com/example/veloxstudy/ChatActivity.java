@@ -1,8 +1,6 @@
 package com.example.veloxstudy;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+
+import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -11,10 +9,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -22,6 +24,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
@@ -97,6 +100,7 @@ public class ChatActivity extends AppCompatActivity {
         DatabaseReference chatReference = database.getReference().child("chats").child(senderRoom).child("messages");
 
         chatReference.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 messagesArrayList.clear();
@@ -137,33 +141,20 @@ public class ChatActivity extends AppCompatActivity {
         });
 
 
-        sendMsgIB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String message = (writeMsgET.getText()).toString().trim();
-                if (message.isEmpty()){
-                    Toast.makeText(getApplicationContext(),"Enter Message",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                writeMsgET.setText("");
-                Date date = new Date();
-                MsgModel messages = new MsgModel(message,senderID,date.getTime());
-
-                database = FirebaseDatabase.getInstance();
-                database.getReference().child("chats").child(senderRoom).child("messages").push()
-                        .setValue(messages).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                database.getReference().child("chats").child(receiverRoom).child("messages").push()
-                                        .setValue(messages).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                chatRv.smoothScrollToPosition(messagesArrayList.size() - 1);
-                                            }
-                                        });
-                            }
-                        });
+        sendMsgIB.setOnClickListener(v -> {
+            String message = (writeMsgET.getText()).toString().trim();
+            if (message.isEmpty()){
+                Toast.makeText(getApplicationContext(),"Enter Message",Toast.LENGTH_SHORT).show();
+                return;
             }
+            writeMsgET.setText("");
+            Date date = new Date();
+            MsgModel messages = new MsgModel(message,senderID,date.getTime());
+
+            database = FirebaseDatabase.getInstance();
+            database.getReference().child("chats").child(senderRoom).child("messages").push()
+                    .setValue(messages).addOnCompleteListener(task -> database.getReference().child("chats").child(receiverRoom).child("messages").push()
+                            .setValue(messages).addOnCompleteListener(task1 -> chatRv.smoothScrollToPosition(messagesArrayList.size() - 1)));
         });
 
     }

@@ -62,7 +62,8 @@
             android:autoLink="web"
             android:maxLines="3"
             android:minHeight="48dp"
-            android:textColorHint="@color/light_white" />
+            android:textColorHint="@color/light_white"
+            android:autofillHints="" />
 
         <EditText
             android:id="@+id/PhoneEditText"
@@ -89,7 +90,8 @@
             android:scrollbars="vertical"
             android:maxLength="500"
             android:minHeight="48dp"
-            android:textColorHint="@color/light_white" />
+            android:textColorHint="@color/light_white"
+            android:autofillHints="" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switch1"
@@ -111,7 +113,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Save"
+            android:text="@string/save"
             android:textStyle="bold"/>
 
     </LinearLayout>

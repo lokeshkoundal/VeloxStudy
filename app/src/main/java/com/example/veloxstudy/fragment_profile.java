@@ -1,10 +1,8 @@
 package com.example.veloxstudy;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,15 +11,18 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.Objects;
 
 public class fragment_profile extends Fragment {
@@ -53,18 +54,10 @@ public class fragment_profile extends Fragment {
 
         SwipeRefreshLayout swipeRefreshLayout = rootView.findViewById(R.id.swipeRefreshProfile);
 
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        swipeRefreshLayout.setRefreshing(false);
-                        fetchData();
-                    }
-                }, 1000);
-            }
-        });
+        swipeRefreshLayout.setOnRefreshListener(() -> new Handler().postDelayed(() -> {
+            swipeRefreshLayout.setRefreshing(false);
+            fetchData();
+        }, 1000));
 
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -101,24 +94,20 @@ public class fragment_profile extends Fragment {
     void fetchData(){
         Store = FirebaseFirestore.getInstance();
         DocumentReference docRef = Store.collection("users").document(uid);
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        docRef.get().addOnCompleteListener(task -> {
 
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
 
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
+                if (document.exists()) {
 
-                    if (document.exists()) {
-
-                        String BioReceived = Objects.requireNonNull(document.get("Bio")).toString();
-                        String usernameReceived = Objects.requireNonNull(document.get("Name")).toString();
-                        bioTv.setText(BioReceived);
-                        usernameTv.setText(usernameReceived);
+                    String BioReceived = Objects.requireNonNull(document.get("Bio")).toString();
+                    String usernameReceived = Objects.requireNonNull(document.get("Name")).toString();
+                    bioTv.setText(BioReceived);
+                    usernameTv.setText(usernameReceived);
 
 
 
-                    }
                 }
             }
         });

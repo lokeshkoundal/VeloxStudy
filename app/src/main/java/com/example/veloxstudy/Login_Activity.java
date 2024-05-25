@@ -1,19 +1,19 @@
 package com.example.veloxstudy;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -21,6 +21,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,9 +54,7 @@ public class Login_Activity extends AppCompatActivity {
 
         SignInButton signInButton = findViewById(R.id.googleBtn);
 
-        signInButton.setOnClickListener(view -> {
-            signInWithGoogle(mGoogleSignInClient);
-        });
+        signInButton.setOnClickListener(view -> signInWithGoogle(mGoogleSignInClient));
 
 //
     }
@@ -106,25 +105,22 @@ public class Login_Activity extends AppCompatActivity {
 
                             docRef = fireStore.collection("users").document(uid);
 
-                            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            docRef.get().addOnCompleteListener(task1 -> {
 
-                                    if (task.isSuccessful()) {
-                                        DocumentSnapshot document = task.getResult();
+                                if (task1.isSuccessful()) {
+                                    DocumentSnapshot document = task1.getResult();
 
-                                            Map<String, Object> usermap = new HashMap<>();
-                                            usermap.put("Email", userMail);
-                                            usermap.put("Name", userName);
-                                            usermap.put("uri", photoUrl);
+                                        Map<String, Object> usermap = new HashMap<>();
+                                        usermap.put("Email", userMail);
+                                        usermap.put("Name", userName);
+                                        usermap.put("uri", photoUrl);
 
-                                        if (document.exists()) {
+                                    if (document.exists()) {
 
-                                            docRef.update(usermap);
-                                        }
-                                        else
-                                            docRef.set(usermap);
+                                        docRef.update(usermap);
                                     }
+                                    else
+                                        docRef.set(usermap);
                                 }
                             });
                       }
@@ -140,21 +136,18 @@ public class Login_Activity extends AppCompatActivity {
                         editor.putBoolean("flag",true);
                         editor.apply();
 
-                        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
-                                    DocumentSnapshot document = task.getResult();
+                        docRef.get().addOnCompleteListener(task12 -> {
+                            if(task12.isSuccessful()){
+                                DocumentSnapshot document = task12.getResult();
 
-                                    if(document.exists()){
-                                        if(document.contains("OldUser")){
-                                            startActivity(iHome);
-                                            finish();
-                                        }
-                                        else{
-                                            startActivity(iForm);
-                                            finish();
-                                        }
+                                if(document.exists()){
+                                    if(document.contains("OldUser")){
+                                        startActivity(iHome);
+                                        finish();
+                                    }
+                                    else{
+                                        startActivity(iForm);
+                                        finish();
                                     }
                                 }
                             }

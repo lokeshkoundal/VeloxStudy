@@ -4,7 +4,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="16dp"
@@ -12,9 +11,10 @@
     android:background="@color/black">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="350dp"
-        android:layout_height="500dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
+        android:layout_margin="10dp"
         app:cardBackgroundColor="@color/greyApp"
         android:layout_gravity="center"
         app:cardElevation="11dp">
@@ -23,29 +23,32 @@
             android:id="@+id/textViewEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="100dp"
             android:autoLink="email"
-            android:layout_marginStart="10dp"
             android:clickable="true"
-            android:drawableLeft="@drawable/ic_mail"
             android:drawablePadding="8dp"
             android:text="@string/email"
             android:textColor="@color/white"
-            android:textSize="25sp" />
+            android:textSize="25sp"
+            android:focusable="true"
+            app:drawableLeftCompat="@drawable/ic_mail" />
 
         <TextView
             android:id="@+id/textViewPhoneNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="280dp"
+            android:layout_marginTop="250dp"
+            android:layout_marginBottom="50dp"
             android:autoLink="phone"
             android:clickable="true"
-            android:drawableLeft="@drawable/ic_phone"
             android:drawablePadding="8dp"
             android:layout_marginStart="10dp"
             android:text="@string/phone"
             android:textColor="@color/white"
-            android:textSize="25sp" />
+            android:textSize="25sp"
+            app:drawableLeftCompat="@drawable/ic_phone"
+            android:focusable="true" />
 
     </androidx.cardview.widget.CardView>
 

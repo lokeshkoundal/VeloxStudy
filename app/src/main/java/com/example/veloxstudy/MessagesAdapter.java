@@ -19,6 +19,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class MessagesAdapter extends RecyclerView.Adapter  {
     Context context;
@@ -86,7 +87,7 @@ public class MessagesAdapter extends RecyclerView.Adapter  {
     @Override
     public int getItemViewType(int position) {
         MsgModel messages = messagesArrayListAdapter.get(position);
-        if(FirebaseAuth.getInstance().getCurrentUser().getUid().equals(messages.getSenderID())){
+        if(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid().equals(messages.getSenderID())){
             return ITEM_SEND;
         }
         else{
@@ -94,7 +95,7 @@ public class MessagesAdapter extends RecyclerView.Adapter  {
         }
     }
 
-    class SenderViewHolder extends RecyclerView.ViewHolder {
+    static class SenderViewHolder extends RecyclerView.ViewHolder {
         ImageView pfpIv;
         TextView msgTv;
         public SenderViewHolder(@NonNull View itemView) {
@@ -104,7 +105,7 @@ public class MessagesAdapter extends RecyclerView.Adapter  {
         }
     }
 
-    class ReceiverViewHolder extends RecyclerView.ViewHolder {
+    static class ReceiverViewHolder extends RecyclerView.ViewHolder {
         ImageView pfpIv;
         TextView msgTv;
 

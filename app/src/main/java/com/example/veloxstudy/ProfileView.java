@@ -1,24 +1,23 @@
 package com.example.veloxstudy;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Objects;
-import android.util.Patterns;
 
 public class ProfileView extends AppCompatActivity {
     TextView bioTv,nameTv,emailTv,websiteTv;
@@ -54,61 +53,58 @@ public class ProfileView extends AppCompatActivity {
         DocumentReference docRef = Store.collection("users").document(uid);
         Log.d("ProfileView", "UID: " + uid);
 
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+        docRef.get().addOnCompleteListener(task -> {
 
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
 
-                    if (document.exists()) {
+                if (document.exists()) {
 
-                        String emailReceived = Objects.requireNonNull(document.get("Email")).toString();
-                        String BioReceived = "";
-                        String websiteReceived = "";
-                        boolean websiteValid = false;
-                        boolean studentSwitchValueReceived= false;
-                        boolean tutorSwitchValueReceived = false;
+                    String emailReceived = Objects.requireNonNull(document.get("Email")).toString();
+                    String BioReceived = "";
+                    String websiteReceived = "";
+                    boolean websiteValid = false;
+                    boolean studentSwitchValueReceived= false;
+                    boolean tutorSwitchValueReceived = false;
 
-                        if(document.contains("Bio"))
-                            BioReceived = Objects.requireNonNull(document.get("Bio")).toString();
+                    if(document.contains("Bio"))
+                        BioReceived = Objects.requireNonNull(document.get("Bio")).toString();
 
 
-                        if(document.contains("Website")) {
-                            websiteReceived = Objects.requireNonNull(document.get("Website")).toString();
-                            websiteValid = Patterns.WEB_URL.matcher(websiteReceived).matches();
+                    if(document.contains("Website")) {
+                        websiteReceived = Objects.requireNonNull(document.get("Website")).toString();
+                        websiteValid = Patterns.WEB_URL.matcher(websiteReceived).matches();
 
-                            if(websiteValid){
-                                websiteTv.setText(websiteReceived);
-                            }
+                        if(websiteValid){
+                            websiteTv.setText(websiteReceived);
                         }
-
-
-                        if(document.contains("studentSwitchValue"))
-                              studentSwitchValueReceived = Objects.requireNonNull(document.getBoolean("studentSwitchValue"));
-
-                        if(document.contains("tutorSwitchValue"))
-                            tutorSwitchValueReceived = Objects.requireNonNull(document.getBoolean("tutorSwitchValue"));
-
-
-                        bioTv.setText(BioReceived);
-                        emailTv.setText(emailReceived);
-
-                        if(websiteReceived.equals("") || !websiteValid){
-                            websiteTv.setVisibility(View.INVISIBLE);
-                        }
-
-                        if(tutorSwitchValueReceived){
-                            tutorCv.setVisibility(View.VISIBLE);
-                        }
-
-                        if(studentSwitchValueReceived){
-                            studentCv.setVisibility(View.VISIBLE);
-                        }
-
-
-
                     }
+
+
+                    if(document.contains("studentSwitchValue"))
+                          studentSwitchValueReceived = Objects.requireNonNull(document.getBoolean("studentSwitchValue"));
+
+                    if(document.contains("tutorSwitchValue"))
+                        tutorSwitchValueReceived = Objects.requireNonNull(document.getBoolean("tutorSwitchValue"));
+
+
+                    bioTv.setText(BioReceived);
+                    emailTv.setText(emailReceived);
+
+                    if(websiteReceived.equals("") || !websiteValid){
+                        websiteTv.setVisibility(View.INVISIBLE);
+                    }
+
+                    if(tutorSwitchValueReceived){
+                        tutorCv.setVisibility(View.VISIBLE);
+                    }
+
+                    if(studentSwitchValueReceived){
+                        studentCv.setVisibility(View.VISIBLE);
+                    }
+
+
+
                 }
             }
         });

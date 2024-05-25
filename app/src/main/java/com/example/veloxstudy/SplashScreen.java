@@ -1,11 +1,14 @@
 package com.example.veloxstudy;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 
+@SuppressLint("CustomSplashScreen")
 public class SplashScreen extends AppCompatActivity {
 
 
@@ -19,24 +22,20 @@ public class SplashScreen extends AppCompatActivity {
 
 
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                SharedPreferences pref = getSharedPreferences("login",MODE_PRIVATE);
-                boolean check =  pref.getBoolean("flag",false);
+        new Handler().postDelayed(() -> {
+            SharedPreferences pref = getSharedPreferences("login",MODE_PRIVATE);
+            boolean check =  pref.getBoolean("flag",false);
 
-                if(check){
-                    startActivity(iHome);
+            if(check){
+                startActivity(iHome);
 
-                }
-                else{
-                    startActivity(iLogin);
+            }
+            else{
+                startActivity(iLogin);
 
-                }
-
-                finish();
             }
 
+            finish();
         },1600);
 
 

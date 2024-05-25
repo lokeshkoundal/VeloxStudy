@@ -58,22 +58,14 @@ public class fragment_Home extends Fragment {
 
         fetchData();
 
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        swipeRefreshLayout.setRefreshing(false);
-                        arrModel.clear();
-                        fetchData();
+        swipeRefreshLayout.setOnRefreshListener(() -> new Handler().postDelayed(() -> {
+            swipeRefreshLayout.setRefreshing(false);
+            arrModel.clear();
+            fetchData();
 
-                        //RefreshCode
+            //RefreshCode
 
-                    }
-                }, 1000);
-            }
-        });
+        }, 1000));
 
         swipeRefreshLayout.setColorSchemeResources(
                 R.color.greyApp,
@@ -81,12 +73,9 @@ public class fragment_Home extends Fragment {
                 R.color.white
         );
 
-        addReminderBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(requireContext(), AddReminder.class);
-                startActivity(intent);
-            }
+        addReminderBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(requireContext(), AddReminder.class);
+            startActivity(intent);
         });
 
         return view;

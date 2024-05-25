@@ -1,20 +1,13 @@
 package com.example.veloxstudy;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SwitchCompat;
-
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -58,27 +51,24 @@ public class EditProfile extends AppCompatActivity {
             documentReference = fireStore.collection("users").document(uid);
         }
 
-        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+        documentReference.get().addOnCompleteListener(task -> {
 
-                DocumentSnapshot document = task.getResult();
+            DocumentSnapshot document = task.getResult();
 
-                if(document.exists()){
-                    String bioReceived = Objects.requireNonNull(document.get("Bio")).toString();
-                    String usernameReceived = Objects.requireNonNull(document.get("Name")).toString();
-                    String websiteReceived = Objects.requireNonNull(document.get("Website")).toString();
-                    String phoneReceived = Objects.requireNonNull(document.get("phoneNumber")).toString();
-                    boolean studentSwitchValueReceived = Objects.requireNonNull(document.getBoolean("studentSwitchValue"));
-                    boolean tutorSwitchValueReceived = Objects.requireNonNull(document.getBoolean("tutorSwitchValue"));
+            if(document.exists()){
+                String bioReceived = Objects.requireNonNull(document.get("Bio")).toString();
+                String usernameReceived = Objects.requireNonNull(document.get("Name")).toString();
+                String websiteReceived = Objects.requireNonNull(document.get("Website")).toString();
+                String phoneReceived = Objects.requireNonNull(document.get("phoneNumber")).toString();
+                boolean studentSwitchValueReceived = Objects.requireNonNull(document.getBoolean("studentSwitchValue"));
+                boolean tutorSwitchValueReceived = Objects.requireNonNull(document.getBoolean("tutorSwitchValue"));
 
-                    bioEt.setText(bioReceived);
-                    usernameEt.setText(usernameReceived);
-                    websiteEt.setText(websiteReceived);
-                    phoneEt.setText(phoneReceived);
-                    switchStudent.setChecked(studentSwitchValueReceived);
-                    switchTutor.setChecked(tutorSwitchValueReceived);
-                }
+                bioEt.setText(bioReceived);
+                usernameEt.setText(usernameReceived);
+                websiteEt.setText(websiteReceived);
+                phoneEt.setText(phoneReceived);
+                switchStudent.setChecked(studentSwitchValueReceived);
+                switchTutor.setChecked(tutorSwitchValueReceived);
             }
         });
 
@@ -95,65 +85,44 @@ public class EditProfile extends AppCompatActivity {
 
 
 
-                documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                documentReference.get().addOnCompleteListener(task -> {
 
-                        DocumentSnapshot document = task.getResult();
+                    DocumentSnapshot document = task.getResult();
 
 
 
-                        if (username.isEmpty()) {
-                            Toast.makeText(getApplicationContext(),"Please enter Username!",Toast.LENGTH_SHORT).show();
-                        }
+                    if (username.isEmpty()) {
+                        Toast.makeText(getApplicationContext(),"Please enter Username!",Toast.LENGTH_SHORT).show();
+                    }
 
-                        else if(!studentSwitchValue && !tutorSwitchValue){
-                            Toast.makeText(getApplicationContext(),"Please select student or tutor!",Toast.LENGTH_SHORT).show();
-                        }
+                    else if(!studentSwitchValue && !tutorSwitchValue){
+                        Toast.makeText(getApplicationContext(),"Please select student or tutor!",Toast.LENGTH_SHORT).show();
+                    }
 
-                        else {
+                    else {
 
-                            Map<String, Object> usermap = new HashMap<>();
-                            usermap.put("Website", website);
-                            usermap.put("Name", username);
-                            usermap.put("Bio", bio);
-                            usermap.put("phoneNumber", phoneNumber);
-                            usermap.put("tutorSwitchValue", studentSwitchValue);
-                            usermap.put("studentSwitchValue", tutorSwitchValue);
+                        Map<String, Object> usermap = new HashMap<>();
+                        usermap.put("Website", website);
+                        usermap.put("Name", username);
+                        usermap.put("Bio", bio);
+                        usermap.put("phoneNumber", phoneNumber);
+                        usermap.put("tutorSwitchValue", studentSwitchValue);
+                        usermap.put("studentSwitchValue", tutorSwitchValue);
 
 
-                            if (document.exists())
-                                documentReference.update(usermap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        Toast.makeText(getApplicationContext(), "Profile updated!", Toast.LENGTH_SHORT).show();
-                                        finish();
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        if (document.exists())
+                            documentReference.update(usermap).addOnSuccessListener(unused -> {
+                                Toast.makeText(getApplicationContext(), "Profile updated!", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }).addOnFailureListener(e -> Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show());
 
-                                    }
-                                });
+                        else
+                            documentReference.set(usermap).addOnSuccessListener(unused -> {
+                                Toast.makeText(getApplicationContext(),"Profile Updated!", Toast.LENGTH_SHORT).show();
+                                finish();
 
-                            else
-                                documentReference.set(usermap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        Toast.makeText(getApplicationContext(),"Profile Updated!", Toast.LENGTH_SHORT).show();
-                                        finish();
+                            }).addOnFailureListener(e -> Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show());
 
-                                    }
-
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-
-                        }
                     }
                 });
 
@@ -161,12 +130,7 @@ public class EditProfile extends AppCompatActivity {
         });
 
 
-        cancelBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        cancelBtn.setOnClickListener(v -> finish());
 
     }
 }

@@ -51,6 +51,7 @@
 
     <!-- Website -->
     <EditText
+        android:autofillHints="website"
         android:id="@+id/websiteEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -79,6 +80,7 @@
         android:textColorHint="@color/light_white" />
 
     <EditText
+        android:autofillHints="Bio"
         android:id="@+id/bioEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -120,8 +122,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
         android:text="@string/cancel"
-        android:textColor="#FD4949"
-        android:textStyle="bold"/>
+        android:textColor="@color/white"
+        android:textStyle="bold" />
 
 
 </LinearLayout>

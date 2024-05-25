@@ -1,26 +1,18 @@
 package com.example.veloxstudy;
 
-import androidx.activity.result.contract.ActivityResultContract;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SwitchCompat;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -29,7 +21,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class FormActivity extends AppCompatActivity {
     Button saveBtn,changePfpBtn;
@@ -37,7 +28,7 @@ public class FormActivity extends AppCompatActivity {
     ImageView pfp;
     FirebaseFirestore fireStore;
     String uid, displayName;
-    Uri photoUrl,setImageUri;
+    Uri photoUrl;
     SwitchCompat tutorSwitch, studentSwitch;
 
 
@@ -92,71 +83,64 @@ public class FormActivity extends AppCompatActivity {
 //        });
 
 
-        saveBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String username = usernameEt.getText().toString();
-                String bio = bioEt.getText().toString().trim();
-                String website = websiteEt.getText().toString().trim();
-                String phoneNumber = phoneET.getText().toString().trim();
-                boolean tutorSwitchValue = tutorSwitch.isChecked();
-                boolean studentSwitchValue = studentSwitch.isChecked();
+        saveBtn.setOnClickListener(v -> {
+            String username = usernameEt.getText().toString();
+            String bio = bioEt.getText().toString().trim();
+            String website = websiteEt.getText().toString().trim();
+            String phoneNumber = phoneET.getText().toString().trim();
+            boolean tutorSwitchValue = tutorSwitch.isChecked();
+            boolean studentSwitchValue = studentSwitch.isChecked();
 
-                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
+            docRef.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
 
-                            if(username.isEmpty()){
-                                Toast.makeText(getApplicationContext(),"Please Enter your Username !",Toast.LENGTH_LONG).show();
-                            }
+                    if(username.isEmpty()){
+                        Toast.makeText(getApplicationContext(),"Please Enter your Username !",Toast.LENGTH_LONG).show();
+                    }
 
-                            else if(!tutorSwitchValue&& !studentSwitchValue){
-                                Toast.makeText(getApplicationContext(),"Please Select Tutor or Student !",Toast.LENGTH_LONG).show();
+                    else if(!tutorSwitchValue&& !studentSwitchValue){
+                        Toast.makeText(getApplicationContext(),"Please Select Tutor or Student !",Toast.LENGTH_LONG).show();
 
-                            }
-                            else if(phoneNumber.length()!= 10){
-                                Toast.makeText(getApplicationContext(),"Please Enter a valid number",Toast.LENGTH_LONG).show();
+                    }
+                    else if(phoneNumber.length()!= 10){
+                        Toast.makeText(getApplicationContext(),"Please Enter a valid number",Toast.LENGTH_LONG).show();
 
-                            }
+                    }
 
-                            else{
+                    else{
 
-                                DocumentSnapshot document = task.getResult();
-                                Map<String, Object> usermap = new HashMap<>();
+                        DocumentSnapshot document = task.getResult();
+                        Map<String, Object> usermap = new HashMap<>();
 
-                                usermap.put("Website", website);
-                                usermap.put("Name", username);
-                                usermap.put("Bio", bio);
-                                usermap.put("phoneNumber",phoneNumber);
-                                usermap.put("tutorSwitchValue", tutorSwitchValue);
-                                usermap.put("studentSwitchValue", studentSwitchValue);
-                                usermap.put("OldUser",true);
+                        usermap.put("Website", website);
+                        usermap.put("Name", username);
+                        usermap.put("Bio", bio);
+                        usermap.put("phoneNumber",phoneNumber);
+                        usermap.put("tutorSwitchValue", tutorSwitchValue);
+                        usermap.put("studentSwitchValue", studentSwitchValue);
+                        usermap.put("OldUser",true);
 
 //                                if(!(setImageUri.toString().isEmpty())){
 //                                    usermap.put("uri",setImageUri.toString());
 //                                }
 
-                                if (document.exists()) {
-                                    docRef.update(usermap);
+                        if (document.exists()) {
+                            docRef.update(usermap);
 
-                                } else {
-                                    docRef.set(usermap);
-                                }
-
-                                Toast.makeText(getApplicationContext(),"Login Success !!",Toast.LENGTH_SHORT).show();
-                                Intent iHome = new Intent(getApplicationContext(),MainActivity.class);
-                                startActivity(iHome);
-                                finish();
-                            }
-
-
+                        } else {
+                            docRef.set(usermap);
                         }
-                            }
 
-                });
+                        Toast.makeText(getApplicationContext(),"Login Success !!",Toast.LENGTH_SHORT).show();
+                        Intent iHome = new Intent(getApplicationContext(),MainActivity.class);
+                        startActivity(iHome);
+                        finish();
+                    }
 
-            }
+
+                }
+                    });
+
         });
     }
 

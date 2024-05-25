@@ -52,18 +52,10 @@ public class fragment_chat extends Fragment {
 
         SwipeRefreshLayout swipeRefreshLayout = rootView.findViewById(R.id.swipeRefreshChat);
 
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        swipeRefreshLayout.setRefreshing(false);
-                        //fetchAllUsersData();
-                    }
-                }, 1000);
-            }
-        });
+        swipeRefreshLayout.setOnRefreshListener(() -> new Handler().postDelayed(() -> {
+            swipeRefreshLayout.setRefreshing(false);
+            //fetchAllUsersData();
+        }, 1000));
 
         return rootView;
     }
