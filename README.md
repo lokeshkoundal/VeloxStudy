@@ -35,5 +35,5 @@ Thank you for considering contributing to this project! Together, we can make it
 
 ## Download APK 
 
-- https://github.com/lokeshkoundal/VeloxStudy/blob/master/app/release/app-release.apk
+- https://github.com/lokeshkoundal/VeloxStudy/blob/master/VeloxStudy.apk
 
