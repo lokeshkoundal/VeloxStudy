@@ -36,8 +36,8 @@
             android:layout_marginTop="130dp"
             android:text="An On-Demand Learning Platform"
             android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
 
     <ImageView
