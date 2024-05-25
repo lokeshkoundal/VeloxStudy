@@ -18,6 +18,21 @@ VeloxStudy is an on-demand learning Android app designed to connect students and
 - Firebase Authentication
 - Firebase Realtime Database
 
+## Contribution Guidelines
+
+We welcome contributions from anyone interested in enhancing our project! Whether you're an experienced developer or just starting out, your contributions are valued and appreciated.
+
+If you'd like to contribute, please follow these guidelines:
+
+1. Fork the repository and create your own branch for your contributions.
+2. Make your changes, ensuring they align with the project's goals and coding style.
+3. Test your changes thoroughly to ensure they work as expected.
+4. Commit your changes and create a descriptive pull request with details about the changes you've made.
+5. Be responsive to any feedback or requests for further changes from the maintainers.
+
+Thank you for considering contributing to our project! Together, we can make it even better.
+
+
 ## Download APK 
 
 - https://github.com/lokeshkoundal/VeloxStudy/blob/master/app/release/app-release.apk
