@@ -20,7 +20,7 @@ VeloxStudy is an on-demand learning Android app designed to connect students and
 
 ## Contribution Guidelines
 
-We welcome contributions from anyone interested in enhancing our project! Whether you're an experienced developer or just starting out, your contributions are valued and appreciated.
+I welcome contributions from anyone interested in enhancing my project! Whether you're an experienced developer or just starting out, your contributions are valued and appreciated.
 
 If you'd like to contribute, please follow these guidelines:
 
@@ -30,7 +30,7 @@ If you'd like to contribute, please follow these guidelines:
 4. Commit your changes and create a descriptive pull request with details about the changes you've made.
 5. Be responsive to any feedback or requests for further changes from the maintainers.
 
-Thank you for considering contributing to our project! Together, we can make it even better.
+Thank you for considering contributing to this project! Together, we can make it even better.
 
 
 ## Download APK 
