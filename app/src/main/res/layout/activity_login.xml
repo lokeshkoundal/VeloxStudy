@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/ubuntu_mono"
-            android:text="Welcome to VeloxStudy!"
+            android:text="@string/welcome_to_veloxstudy"
             android:textColor="@color/white"
             android:textSize="50sp"
             android:layout_marginStart="50dp"
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
             android:layout_marginTop="130dp"
-            android:text="An On-Demand Learning Platform"
+            android:text="@string/an_on_demand_learning_platform"
             android:textColor="@color/white"
             android:textSize="15sp"
             android:textStyle="bold" />

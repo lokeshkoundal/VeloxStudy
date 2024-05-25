@@ -79,7 +79,7 @@
     <string name="notification_button">notification_button</string>
     <string name="upcoming_classes">Upcoming Classes</string>
     <string name="no_class_is_scheduled_yet">no class is scheduled yet.</string>
-    <string name="welcome_to_veloxstudy">Welcome to VeloxStudy</string>
+    <string name="welcome_to_veloxstudy">Welcome to VeloxStudy !</string>
     <string name="welcome_photo">Welcome photo</string>
     <string name="create_a_chat">create a chat</string>
     <string name="video_call">Video call</string>
@@ -116,6 +116,7 @@
     <string name="enter_tutor_name">Enter tutor name</string>
     <string name="enter_class_name">Enter class name</string>
     <string name="add_a_reminder">Add a Reminder</string>
+    <string name="an_on_demand_learning_platform">An On-Demand Learning Platform</string>
 
 </resources>
 
