@@ -1,24 +1,17 @@
 package com.example.veloxstudy;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import java.text.SimpleDateFormat;
@@ -62,44 +55,36 @@ public class AddReminder extends AppCompatActivity {
         fireStore = FirebaseFirestore.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
 
-        saveBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String classname = className.getText().toString();
-                String tutorname = tutorName.getText().toString();
-                int year = datePicker.getYear();
-                int month = datePicker.getMonth();
-                int dayOfMonth = datePicker.getDayOfMonth();
+        saveBtn.setOnClickListener(v -> {
+            String classname = className.getText().toString();
+            String tutorName = this.tutorName.getText().toString();
+            int year = datePicker.getYear();
+            int month = datePicker.getMonth();
+            int dayOfMonth = datePicker.getDayOfMonth();
 
-                Calendar selectedDate = Calendar.getInstance();
-                selectedDate.set(year, month, dayOfMonth);
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-                String date = dateFormat.format(selectedDate.getTime());
+            Calendar selectedDate = Calendar.getInstance();
+            selectedDate.set(year, month, dayOfMonth);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            String date = dateFormat.format(selectedDate.getTime());
 
-                int hourOfDay = timePicker.getHour();
-                int minute = timePicker.getMinute();
+            int hourOfDay = timePicker.getHour();
+            int minute = timePicker.getMinute();
 
-                Calendar selectedTime = Calendar.getInstance();
-                selectedTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                selectedTime.set(Calendar.MINUTE, minute);
+            Calendar selectedTime = Calendar.getInstance();
+            selectedTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            selectedTime.set(Calendar.MINUTE, minute);
 
-                SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
-                String time = timeFormat.format(selectedTime.getTime());
+            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
+            String time = timeFormat.format(selectedTime.getTime());
 
 
-                if (classname.isEmpty() || tutorname.isEmpty() || date.isEmpty() || time.isEmpty())
-                    Toast.makeText(getApplicationContext(), "Please add data correctly", Toast.LENGTH_SHORT).show();
+            if (classname.isEmpty() || tutorName.isEmpty() || date.isEmpty() || time.isEmpty())
+                Toast.makeText(getApplicationContext(), "Please add data correctly", Toast.LENGTH_SHORT).show();
 
-                else
-                    storeData(classname,tutorname,date,time);
+            else
+                storeData(classname,tutorName,date,time);
 
-            }
         });
-
-
-
-
-
 
     }
 
@@ -111,37 +96,24 @@ public class AddReminder extends AppCompatActivity {
              documentReference = fireStore.collection("reminders").document(uid).collection("data").document(classname + tutorName);
         }
 
-        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+        documentReference.get().addOnCompleteListener(task -> {
 
-                DocumentSnapshot document = task.getResult();
-                Map<String, Object> usermap = null;
+                 Map<String, Object> usermap;
 
 
-                    usermap = new HashMap<>();
-                    usermap.put("Classname", classname);
-                    usermap.put("Tutorname", tutorName);
-                    usermap.put("Time", time);
-                    usermap.put("Date", date);
-                    usermap.put("createdAt", FieldValue.serverTimestamp());
+                usermap = new HashMap<>();
+                usermap.put("Classname", classname);
+                usermap.put("Tutorname", tutorName);
+                usermap.put("Time", time);
+                usermap.put("Date", date);
+                usermap.put("createdAt", FieldValue.serverTimestamp());
 
 
-                    documentReference.set(usermap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            Toast.makeText(getApplicationContext(), "Reminder set", Toast.LENGTH_SHORT).show();
-                            finish();
+                documentReference.set(usermap).addOnSuccessListener(unused -> {
+                    Toast.makeText(getApplicationContext(), "Reminder set", Toast.LENGTH_SHORT).show();
+                    finish();
 
-                        }
-
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
+                }).addOnFailureListener(e -> Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show());
             }
         );
 
