@@ -10,3 +10,10 @@ VeloxStudy is an on-demand learning Android app designed to connect students and
 3. Users can chat with anyone on the platform.
 4. Users can edit their profiles, including username, phone number, website, etc.
 5. Users can manually set reminders for classes by adding details about the class.
+
+## Tech and Platforms Used:
+- Java
+- XML
+- Firebase Firestore
+- Firebase Authentication
+- Firebase Realtime Database
