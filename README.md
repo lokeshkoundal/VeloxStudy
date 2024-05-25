@@ -20,5 +20,5 @@ VeloxStudy is an on-demand learning Android app designed to connect students and
 
 ## Download APK 
 
-- https://github.com/lokeshkoundal/VeloxStudy/blob/master/VeloxStudy.apk
+- https://github.com/lokeshkoundal/VeloxStudy/blob/master/app/release/app-release.apk
 
